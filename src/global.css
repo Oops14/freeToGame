@@ -1,0 +1,142 @@
+body {
+    font-family: "Readex Pro", sans-serif;
+    line-height: 1.4;
+    font-size: 14px;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    width: clamp(1520px, 95%, 100%);
+
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+img {
+    height: auto;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+p {
+    margin-bottom: 20px;
+    color: rgba(16, 16, 16, 0.5);
+    line-height: 1.6;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 30px;
+    font-family: 'Spartan', sans-serif;
+    font-weight: 500;
+    color: rgba(16, 16, 16, 0.9);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 20px
+}
+
+h6 {
+    font-size: 13px;
+}
+
+/*  COLOR SCHEME LIGHT  */
+.color-scheme-light {
+    color: #fff;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #FFF;
+    }
+
+    p, ul {
+        color: rgba(255, 255, 255, .9);
+    }
+
+    input[type="submit"] {
+        color: #fff;
+    }
+}
+
+/*   COLOR SCHEME DARK    */
+.color-scheme-dark {
+    color: rgba(16, 16, 16, 0.8);
+
+    h1, h2, h3, h4, h5, h6 {
+        color: rgba(16, 16, 16, 0.8);
+    }
+
+    p, ul {
+        color: rgba(16, 16, 16, 0.8);
+    }
+}
+
+/*  BASE INPUT  */
+
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="url"],
+select {
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: 2px solid rgba(16, 16, 16, 0.05);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid rgba(16, 16, 16, 0.05);
+    outline: none;
+}
+
+.btn,
+input[type="button"],
+input[type="submit"],
+button {
+    background-color: #fff;
+    border: 2px solid rgba(16, 16, 16, 0.05);
+    border-radius: 0;
+    padding: 10px 20px;
+    outline: 0;
+    text-decoration: none;
+    font-size: 14px;
+}
+

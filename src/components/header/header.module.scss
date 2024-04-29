@@ -1,0 +1,117 @@
+//
+// HEADER GENERAL
+//
+.main_header {
+    display: flex;
+    align-items: center;
+
+    height: 90px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+
+    margin-bottom: 40px;
+
+    .container {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        .header_col_center {
+            flex: 1 1 0;
+        }
+
+        .header_col_right {
+            display: flex;
+            align-items: center;
+
+            .social_icons,
+            .search {
+                display: flex;
+                align-items: center;
+            }
+
+            .social_icons {
+                padding-inline: 10px;
+                gap: 20px;
+
+                .icon_item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    width: 40px;
+                    height: 40px;
+                    background-color: #efeeef;
+                    border-radius: 50%;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: all .2s linear;
+
+                    svg {
+                        color: #999999;
+                    }
+
+                    &:hover {
+                        background-color: #774430;
+
+                        svg {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+            .search {
+                position: relative;
+
+                input {
+                    border-radius: 35px;
+                    padding-right: 40px;
+                }
+
+                .icon_btn {
+                    position: absolute;
+                    right: 5px;
+                    color: #fff;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    background-color: #7153ed;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    cursor: pointer;
+                    transition: all 0.2s linear;
+
+                    &:hover {
+                        background-color: #826bdb;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+// HEADER MENU
+//
+.header_menu {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding-inline: 10px;
+
+    li {
+        a {
+            color: #333;
+
+            &.active,
+            &:hover {
+                color: #7153ed;
+            }
+        }
+    }
+}
