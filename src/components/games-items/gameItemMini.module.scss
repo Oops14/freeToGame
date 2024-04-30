@@ -1,0 +1,26 @@
+.game_item_mini {
+    display: flex;
+    gap: 15px;
+}
+
+.game_details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.item_mini_title {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.developer {
+    color: rgb(109,78,236);
+    font-weight: 600;
+}
+
+.image {
+    img {
+        height: 100%;
+    }
+}
