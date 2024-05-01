@@ -11,7 +11,7 @@ export const Header = () => {
             <section className={style.main_header}>
                 <div className={"container " + style.container}>
                     <div className={style.header_col_left}>
-                        <img src={logo} />
+                        <img src={logo}  alt={'#'}/>
                     </div>
                     <div className={style.header_col_center}>
                         <ul className={style.header_menu}>
