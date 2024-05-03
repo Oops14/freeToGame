@@ -2,8 +2,25 @@ import styles from "./intro.module.scss";
 import "../../bootstrap/bootstrap-grid.scss";
 import slider_img from "../../assets/slider/wd-vgs-slide-1-opt.jpg";
 import { GameItemMini } from "../games-items/GameItemMini";
+import React from "react";
+import { useSelector } from "react-redux";
+import { AppRootStateType } from "../../state/store";
+import { InitialStateType } from "../../state/gamesReducer";
 
 export const Intro = () => {
+    const games = useSelector<AppRootStateType, InitialStateType>(
+        (state) => state.games
+    );
+
+    // Shuffle array
+    const shuffled = games.games.sort(() => 0.5 - Math.random());
+    // Get sub-array of first n elements after shuffled
+    const randomGames = shuffled.slice(0, 5);
+
+    React.useEffect(() => {
+        console.log(games.games);
+    }, []);
+
     return (
         <section className={styles.intro}>
             <div className="container">
@@ -19,11 +36,16 @@ export const Intro = () => {
                         <div className={styles.col_inner_games}>
                             <h5>Discounted games</h5>
                             <div className={styles.games}>
-                                <GameItemMini />
-                                <GameItemMini />
-                                <GameItemMini />
-                                <GameItemMini />
-                                <GameItemMini />
+                                {randomGames.map((game) => {
+                                    return (
+                                        <GameItemMini
+                                            key={game.id}
+                                            title={game.title}
+                                            img={game.thumbnail}
+                                            dev={game.developer}
+                                        />
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

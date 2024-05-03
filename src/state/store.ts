@@ -2,10 +2,11 @@ import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from 'r
 import {thunk, ThunkDispatch} from "redux-thunk"
 import {useDispatch} from "react-redux"
 import {appReducer} from "./appReducer.ts";
-
+import { gamesReducer } from './gamesReducer.ts';
 
 const rootReducer = combineReducers({
     app: appReducer,
+    games: gamesReducer,
 })
 
 // непосредственно создаём store
