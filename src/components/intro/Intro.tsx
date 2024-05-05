@@ -2,7 +2,6 @@ import styles from "./intro.module.scss";
 import "../../bootstrap/bootstrap-grid.scss";
 import slider_img from "../../assets/slider/wd-vgs-slide-1-opt.jpg";
 import { GameItemMini } from "../games-items/GameItemMini";
-import React from "react";
 import { useSelector } from "react-redux";
 import { AppRootStateType } from "../../state/store";
 import { InitialStateType } from "../../state/gamesReducer";
@@ -11,15 +10,10 @@ export const Intro = () => {
     const games = useSelector<AppRootStateType, InitialStateType>(
         (state) => state.games
     );
-
     // Shuffle array
     const shuffled = games.games.sort(() => 0.5 - Math.random());
-    // Get sub-array of first n elements after shuffled
+    // Get sub-array of first 5 elements after shuffled
     const randomGames = shuffled.slice(0, 5);
-
-    React.useEffect(() => {
-        console.log(games.games);
-    }, []);
 
     return (
         <section className={styles.intro}>
@@ -34,7 +28,7 @@ export const Intro = () => {
                     </div>
                     <div className="col-lg-3">
                         <div className={styles.col_inner_games}>
-                            <h5>Discounted games</h5>
+                            <h5>Free to play games</h5>
                             <div className={styles.games}>
                                 {randomGames.map((game) => {
                                     return (
