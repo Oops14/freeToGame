@@ -1,0 +1,29 @@
+.category_title {
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.product_tabs {
+
+}
+
+.product_tabs_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.categories_block {
+  min-width: 330px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  margin-right: 16px;
+}
+
+.tabs_title {
+  font-size: 24px;
+}

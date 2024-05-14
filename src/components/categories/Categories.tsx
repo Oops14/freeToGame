@@ -28,6 +28,8 @@ export const Categories = () => {
         <section className={style.categories}>
             <div className="container">
                 <div className={style.slider}>
+
+                    {/* TODO: CHANGE THE ARROWS FOR THE SLIDER. */}
                     <Slider {...settings}>
                         {categories.map((categ, index) => {
                             return (

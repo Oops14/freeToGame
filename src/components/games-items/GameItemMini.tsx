@@ -1,14 +1,13 @@
-import game_item_mini from "../../assets/intro/2.jpeg";
 import BasicRating from "../rating/BasicRating";
 import styles from "./gameItemMini.module.scss";
 
-type GameItemMiniType = {
+type GameItemMini = {
     title: string
     img: string
     dev: string
 }
 
-export const GameItemMini: React.FC<GameItemMiniType> = ({title, img, dev}) => {
+export const GameItemMini: React.FC<GameItemMini> = ({title, img, dev}) => {
     return (
         <div className={styles.game_item_mini}>
             <div className={styles.image}>
