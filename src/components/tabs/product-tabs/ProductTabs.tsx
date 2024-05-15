@@ -5,12 +5,12 @@ import { GameType } from '../../../api/gamesApi.ts'
 import { getCategoryGamesTC } from '../../../state/gamesReducer.ts'
 import { GameGridItem } from '../../games-items/GameGridItem.tsx'
 import CircularIndeterminate from '../../../features/progress-bar/CircularIndeterminate.tsx'
-import {RequestStatusType} from "../../../state/appReducer.ts";
+import { RequestStatusType } from '../../../state/appReducer.ts'
+import { useEffect, useState } from 'react'
 
 export const ProductTabs = () => {
     const dispatch = useAppDispatch()
-    const loader = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status);
-
+    const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const categories = [
         { title: 'Shooter' },
         { title: 'Strategy' },
@@ -21,14 +21,21 @@ export const ProductTabs = () => {
         { title: 'Sports' },
     ]
 
+    const [activeTab, setActiveTab] = useState(categories[0].title)
+    console.log(activeTab)
+
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)
     // Shuffle array of games by category.
     const shuffled = gamesByCategory.slice(0, 6)
 
     const handleCategoryClick = (categoryTitle: string) => {
-        console.log(categoryTitle)
+        setActiveTab(categoryTitle)
         dispatch(getCategoryGamesTC(categoryTitle))
     }
+
+    useEffect(() => {
+        dispatch(getCategoryGamesTC(categories[0].title))
+    }, [])
 
     // **
     // TODO: ADD SLIDER FOR THE PRODUCTS BY CATEGORIES.
@@ -45,7 +52,11 @@ export const ProductTabs = () => {
                             {categories.map((c, index) => {
                                 return (
                                     <li
-                                        className={style.category_title}
+                                        className={
+                                            activeTab === c.title
+                                                ? `${style.category_title + ' ' + style.active_tab}`
+                                                : style.category_title
+                                        }
                                         onClick={() => handleCategoryClick(c.title)}
                                         key={index}>
                                         {c.title}
