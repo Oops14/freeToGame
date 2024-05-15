@@ -1,5 +1,6 @@
 import { Dispatch } from 'react'
 import { gamesApi, GameType } from '../api/gamesApi'
+import { setLoaderAC } from './appReducer.ts'
 
 // Cases
 const SET_GAMES = 'APP/SET-GAMES'
@@ -45,11 +46,15 @@ export const setGamesTC = () => (dispatch: Dispatch<ActionsType>) => {
         .catch((err) => console.log(err))
 }
 
-export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<any>) => {
+    dispatch(setLoaderAC('loading'))
+
     gamesApi
         .gamesByCategory(category)
         .then((res) => {
             dispatch(getGamesByCategoryAC(res.data))
+
+            dispatch(setLoaderAC('succeeded'))
         })
         .catch((err) => alert(err))
 }

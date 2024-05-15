@@ -7,7 +7,7 @@
 }
 
 .product_tabs {
-
+  margin-bottom: 50px;
 }
 
 .product_tabs_inner {
@@ -26,4 +26,10 @@
 
 .tabs_title {
   font-size: 24px;
+}
+
+.products_by_categories {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
 }

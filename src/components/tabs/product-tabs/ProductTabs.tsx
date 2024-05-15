@@ -4,9 +4,12 @@ import { AppRootStateType, useAppDispatch } from '../../../state/store.ts'
 import { GameType } from '../../../api/gamesApi.ts'
 import { getCategoryGamesTC } from '../../../state/gamesReducer.ts'
 import { GameGridItem } from '../../games-items/GameGridItem.tsx'
+import CircularIndeterminate from '../../../features/progress-bar/CircularIndeterminate.tsx'
+import {RequestStatusType} from "../../../state/appReducer.ts";
 
 export const ProductTabs = () => {
     const dispatch = useAppDispatch()
+    const loader = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status);
 
     const categories = [
         { title: 'Shooter' },
@@ -27,8 +30,11 @@ export const ProductTabs = () => {
         dispatch(getCategoryGamesTC(categoryTitle))
     }
 
-    console.log(gamesByCategory)
-
+    // **
+    // TODO: ADD SLIDER FOR THE PRODUCTS BY CATEGORIES.
+    // **
+    // TODO: ADD STYLES FOR GRID ITEMS.
+    // **
     return (
         <div className={style.product_tabs}>
             <div className="container">
@@ -48,8 +54,9 @@ export const ProductTabs = () => {
                             })}
                         </ul>
                     </div>
-                    <div className="products_by_categories">
+                    <div className={style.products_by_categories}>
                         <div className={'row'}>
+                            {loader === 'loading' && <CircularIndeterminate />}
                             {shuffled.map((g) => {
                                 return (
                                     <div className={'col-lg-4'}>
