@@ -6,6 +6,7 @@ import { Intro } from './components/intro/Intro.tsx'
 import { useAppDispatch } from './state/store.ts'
 import { setGamesTC } from './state/gamesReducer.ts'
 import { ProductTabs } from './components/tabs/product-tabs/ProductTabs.tsx'
+import { Articles } from './components/articles/Articles.tsx'
 
 function App() {
     const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ function App() {
             <Intro />
             <Categories />
             <ProductTabs />
+            <Articles />
         </>
     )
 }

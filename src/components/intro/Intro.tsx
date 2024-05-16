@@ -1,19 +1,21 @@
-import styles from "./intro.module.scss";
-import "../../bootstrap/bootstrap-grid.scss";
-import slider_img from "../../assets/slider/wd-vgs-slide-1-opt.jpg";
-import { GameItemMini } from "../games-items/GameItemMini";
-import { useSelector } from "react-redux";
-import { AppRootStateType } from "../../state/store";
-import { InitialStateType } from "../../state/gamesReducer";
+import styles from './intro.module.scss'
+import '../../bootstrap/bootstrap-grid.scss'
+import slider_img from '../../assets/slider/wd-vgs-slide-1-opt.jpg'
+import { GameItemMini } from '../games-items/GameItemMini'
+import { useSelector } from 'react-redux'
+import { AppRootStateType } from '../../state/store'
+import { InitialStateType } from '../../state/gamesReducer'
+import { RequestStatusType } from '../../state/appReducer.ts'
+import CircularIndeterminate from '../../features/progress-bar/CircularIndeterminate.tsx'
 
 export const Intro = () => {
-    const games = useSelector<AppRootStateType, InitialStateType>(
-        (state) => state.games
-    );
+    const games = useSelector<AppRootStateType, InitialStateType>((state) => state.games)
+    const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+
     // Shuffle array
-    const shuffled = games.games.sort(() => 0.5 - Math.random());
+    const shuffled = games.games.sort(() => 0.5 - Math.random())
     // Get sub-array of first 5 elements after shuffled
-    const randomGames = shuffled.slice(0, 5);
+    const randomGames = shuffled.slice(0, 5)
 
     return (
         <section className={styles.intro}>
@@ -30,6 +32,7 @@ export const Intro = () => {
                         <div className={styles.col_inner_games}>
                             <h5>Free to play games</h5>
                             <div className={styles.games}>
+                                {loader === 'loading' && <CircularIndeterminate />}
                                 {randomGames.map((game) => {
                                     return (
                                         <GameItemMini
@@ -38,7 +41,7 @@ export const Intro = () => {
                                             img={game.thumbnail}
                                             dev={game.developer}
                                         />
-                                    );
+                                    )
                                 })}
                             </div>
                         </div>
@@ -46,5 +49,5 @@ export const Intro = () => {
                 </div>
             </div>
         </section>
-    );
-};
+    )
+}

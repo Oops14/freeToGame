@@ -37,13 +37,20 @@ const setGamesAC = (games: GameType[]) => ({ type: SET_GAMES, games }) as const
 const getGamesByCategoryAC = (gamesByCategory: GameType[]) => ({ type: GET_GAMES, gamesByCategory }) as const
 
 // Thunks.
-export const setGamesTC = () => (dispatch: Dispatch<ActionsType>) => {
+export const setGamesTC = () => (dispatch: Dispatch<any>) => {
+    dispatch(setLoaderAC('loading'))
+
     gamesApi
         .getGames()
         .then((res) => {
             dispatch(setGamesAC(res.data))
+
+            dispatch(setLoaderAC('succeeded'))
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            alert(err)
+            dispatch(setLoaderAC('failed'))
+        })
 }
 
 export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<any>) => {
@@ -56,5 +63,8 @@ export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<any>
 
             dispatch(setLoaderAC('succeeded'))
         })
-        .catch((err) => alert(err))
+        .catch((err) => {
+            alert(err)
+            dispatch(setLoaderAC('failed'))
+        })
 }
