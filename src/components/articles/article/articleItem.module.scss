@@ -10,7 +10,7 @@
     &:hover {
         .art_img {
             img {
-                scale: 1.1;
+                scale: 1.05;
             }
         }
 
@@ -49,7 +49,7 @@
     position: absolute;
 
     img {
-        transition: all 0.4s ease-in-out;
+        transition: all 0.7s ease-in-out;
         min-height: 300px;
     }
 }

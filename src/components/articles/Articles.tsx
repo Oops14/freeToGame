@@ -5,6 +5,7 @@ export const Articles = () => {
     return (
         <section className={style.articles_section}>
             <div className="container">
+                <h3>Our Latest Articles</h3>
                 <div className="articles_inner">
                     <div className="row">
                         <div className="col-lg-4">

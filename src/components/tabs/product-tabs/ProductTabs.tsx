@@ -68,7 +68,7 @@ export const ProductTabs = () => {
                     <div className={style.products_by_categories}>
                         <div className={'row'}>
                             {loader === 'loading' && <CircularIndeterminate />}
-                            {shuffled.map((g) => {
+                            {loader === 'succeeded' && shuffled.map((g) => {
                                 return (
                                     <div className={'col-lg-4'}>
                                         <GameGridItem title={g.title} img={g.thumbnail} dev={g.developer} />

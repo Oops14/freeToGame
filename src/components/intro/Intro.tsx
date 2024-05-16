@@ -33,7 +33,7 @@ export const Intro = () => {
                             <h5>Free to play games</h5>
                             <div className={styles.games}>
                                 {loader === 'loading' && <CircularIndeterminate />}
-                                {randomGames.map((game) => {
+                                {loader === 'succeeded' && randomGames.map((game) => {
                                     return (
                                         <GameItemMini
                                             key={game.id}
