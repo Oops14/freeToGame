@@ -7,6 +7,7 @@ import { useAppDispatch } from './state/store.ts'
 import { setGamesTC } from './state/gamesReducer.ts'
 import { ProductTabs } from './components/tabs/product-tabs/ProductTabs.tsx'
 import { Articles } from './components/articles/Articles.tsx'
+import { Footer } from './components/footer/Footer.tsx'
 
 function App() {
     const dispatch = useAppDispatch()
@@ -22,6 +23,7 @@ function App() {
             <Categories />
             <ProductTabs />
             <Articles />
+            <Footer />
         </>
     )
 }

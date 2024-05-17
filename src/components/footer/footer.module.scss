@@ -1,0 +1,52 @@
+.footer_general {
+    background-color: #f7f7f7;
+}
+
+.footer_inner {
+
+}
+
+.footer_top,
+.footer_bottom {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.footer_top {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9e9e9;
+
+    .language_switch {
+
+    }
+}
+
+.footer_bottom {
+    display: flex;
+    justify-content: space-between;
+
+    .creators {
+
+    }
+
+    .terms {
+
+    }
+}
+
+.select_curr {
+    width: 265px;
+    background-color: transparent;
+    border: 3px solid #e9e9e9;
+}
+
+.terms_menu {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    li {
+        cursor: pointer;
+    }
+}
