@@ -16,7 +16,7 @@ export const Categories = () => {
         { title: "Sports" },
     ];
 
-    const settings = {
+    const sliderSettings = {
         dots: false,
         infinite: false,
         speed: 500,
@@ -30,7 +30,7 @@ export const Categories = () => {
                 <div className={style.slider}>
 
                     {/* TODO: CHANGE THE ARROWS FOR THE SLIDER. */}
-                    <Slider {...settings}>
+                    <Slider {...sliderSettings}>
                         {categories.map((categ, index) => {
                             return (
                                 <div key={index} className="slider_col">
