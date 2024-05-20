@@ -1,4 +1,4 @@
-import BasicRating from "../rating/BasicRating";
+import BasicRating from "../../features/rating/BasicRating";
 import styles from "./gameItemMini.module.scss";
 
 type GameItemMini = {

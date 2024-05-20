@@ -1,6 +1,9 @@
 import styles from './gameGridItem.module.scss'
-import BasicRating from '../rating/BasicRating.tsx'
+import BasicRating from '../../features/rating/BasicRating.tsx'
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAppDispatch } from '../../state/store.ts'
+import { getGameTitleAC } from '../../state/gamesReducer.ts'
 
 type GameGridItem = {
     title: string
@@ -9,16 +12,24 @@ type GameGridItem = {
 }
 
 export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev }) => {
+    const dispatch = useAppDispatch();
+
+    const handleTitle = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        dispatch(getGameTitleAC(e.currentTarget.innerText))
+    }
+
     return (
         <div>
             <div className={styles.game_grid_item}>
                 <div className={styles.grid_image}>
-                    <a href="#"></a>
+                    <Link onClick={handleTitle} to="/your-repository-name/product-page"></Link>
                     <img src={img} alt="#" />
                 </div>
                 <div className={styles.game_details}>
                     <h5 className={styles.item_grid_title}>
-                        <a href="#">{title}</a>
+                        <Link onClick={handleTitle} to="/your-repository-name/product-page">
+                            {title}
+                        </Link>
                     </h5>
                     <div className="stars">
                         <BasicRating />
@@ -29,4 +40,3 @@ export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev }) => {
         </div>
     )
 }
-

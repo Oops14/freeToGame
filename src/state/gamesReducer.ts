@@ -5,15 +5,18 @@ import { setLoaderAC } from './appReducer.ts'
 // Cases
 const SET_GAMES = 'APP/SET-GAMES'
 const GET_GAMES = 'APP/GET-CATEGORY-GAMES'
+const GET_GAME_TITLE = 'APP/GET-GAME-TITLE'
 
 const initialState: InitialStateType = {
     games: [],
     gamesByCategory: [],
+    gameTitle: '',
 }
 
 export type InitialStateType = {
     games: GameType[]
     gamesByCategory: GameType[]
+    gameTitle: string
 }
 
 export const gamesReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -22,19 +25,22 @@ export const gamesReducer = (state: InitialStateType = initialState, action: Act
             return { ...state, games: action.games }
         case GET_GAMES:
             return { ...state, gamesByCategory: action.gamesByCategory }
+        case GET_GAME_TITLE:
+            return {...state, gameTitle: action.title }
         default:
             return state
     }
 }
 
-type ActionsType = setGamesByCategoryACType | ReturnType<typeof getGamesByCategoryAC>
+type ActionsType = setGamesByCategoryACType | ReturnType<typeof getGamesByCategoryAC> | ReturnType<typeof getGameTitleAC>
 
 // Action creators types.
 type setGamesByCategoryACType = ReturnType<typeof setGamesAC>
 
 // Actions.
-const setGamesAC = (games: GameType[]) => ({ type: SET_GAMES, games }) as const
-const getGamesByCategoryAC = (gamesByCategory: GameType[]) => ({ type: GET_GAMES, gamesByCategory }) as const
+const setGamesAC = (games: GameType[]) => ({ type: SET_GAMES, games } as const)
+const getGamesByCategoryAC = (gamesByCategory: GameType[]) => ({ type: GET_GAMES, gamesByCategory } as const)
+export const getGameTitleAC = (title: string) => ({ type: GET_GAME_TITLE, title } as const)
 
 // Thunks.
 export const setGamesTC = () => (dispatch: Dispatch<any>) => {

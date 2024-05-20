@@ -20,9 +20,7 @@ export const ProductTabs = () => {
         { title: 'Card Game' },
         { title: 'Sports' },
     ]
-
     const [activeTab, setActiveTab] = useState(categories[0].title)
-    console.log(activeTab)
 
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)
     // Shuffle array of games by category.
@@ -68,9 +66,9 @@ export const ProductTabs = () => {
                     <div className={style.products_by_categories}>
                         <div className={'row'}>
                             {loader === 'loading' && <CircularIndeterminate />}
-                            {loader === 'succeeded' && shuffled.map((g) => {
+                            {loader === 'succeeded' && shuffled.map((g, index) => {
                                 return (
-                                    <div className={'col-lg-4'}>
+                                    <div key={index} className={'col-lg-4'}>
                                         <GameGridItem title={g.title} img={g.thumbnail} dev={g.developer} />
                                     </div>
                                 )
