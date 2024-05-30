@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../../app/store.ts'
 import { getGameTitleAC } from '../gamesReducer.ts'
 import BasicRating from '../../../common/components/rating/BasicRating.tsx'
+import { ButtonMain } from '../../../common/components/button/ButtonMain.tsx'
 
 type GameGridItem = {
     title: string
     img: string
-    dev: string
+    dev?: string
+    showButton?: boolean
 }
 
-export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev }) => {
-    const dispatch = useAppDispatch();
+export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev, showButton }) => {
+    const dispatch = useAppDispatch()
 
     const handleTitle = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         dispatch(getGameTitleAC(e.currentTarget.innerText))
@@ -35,6 +37,7 @@ export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev }) => {
                         <BasicRating />
                     </div>
                     <div className={styles.developer}>{dev}</div>
+                    {showButton && <ButtonMain />}
                 </div>
             </div>
         </div>

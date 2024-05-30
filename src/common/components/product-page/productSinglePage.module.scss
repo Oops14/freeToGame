@@ -112,9 +112,56 @@
 }
 
 .reviews {
+    margin-bottom: 50px;
+}
+
+.product_counter_reviews {
+    margin-bottom: 15px;
+}
+
+.review_btn {
+    border-radius: 20px;
+}
+
+.add_review_form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    input,
+    textarea {
+        border-radius: 20px;
+    }
+
+    textarea {
+        min-height: 176px;
+    }
+}
+
+.reviews_inner {
+    padding: 30px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+
+.review_area {
+    margin-bottom: 15px;
+}
+
+.reviews_counter {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avarage_rating {
+    font-size: 102px;
+    font-weight: 500;
 }
 
 .related_products {
+    margin-bottom: 50px;
 }
 
 .stretch {
@@ -128,3 +175,11 @@
     padding-left: calc((100vw - 1520px - var(--wd-scroll-w)) / 2);
     padding-right: calc((100vw - 1520px - var(--wd-scroll-w)) / 2);
 }
+
+
+// HELPERS
+.row_center {
+    align-items: center;
+    margin-bottom: 25px;
+}
+

@@ -13,6 +13,9 @@ import desc_img2 from '../../../assets/descr_images/2.jpeg'
 import desc_img3 from '../../../assets/descr_images/3.jpeg'
 import { AppRootStateType } from '../../../app/store.ts'
 import BasicRating from '../rating/BasicRating.tsx'
+import { Review } from '../../../features/review/Review.tsx'
+import { GameGridItem } from '../../../features/games/game-grid/GameGridItem.tsx'
+import temp_img from '../../../assets/w-vgs-rpg-starfield-430x553.jpg'
 
 export const ProductSinglePage = () => {
     const prodInfo = useSelector<AppRootStateType, string>((state) => state.games.gameTitle)
@@ -123,8 +126,69 @@ export const ProductSinglePage = () => {
                         </p>
                     </div>
                 </div>
-                <div className={style.reviews}></div>
-                <div className={style.related_products}></div>
+                <div className={style.reviews}>
+                    <div className="container">
+                        <div className={style.reviews_inner}>
+                            <h4>Customer Reviews</h4>
+                            <div className={`row ${style.row_center}`}>
+                                <div className="col-lg-6">
+                                    <div className={style.review_area}>
+                                        <h5>ADD A REVIEW</h5>
+                                        <div>
+                                            Your email address will not be published. Required fields are marked *
+                                        </div>
+                                        <form className={style.add_review_form} action="#">
+                                            <label>Your review * </label>
+                                            <textarea name="review_area" id="1"></textarea>
+                                            <label>Name *</label>
+                                            <input type="text" />
+                                            <label>Email *</label>
+                                            <input type="text" />
+
+                                            <button className={`btn ${style.review_btn}`}>Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className={style.reviews_counter}>
+                                        <div className={style.avarage_rating}>4</div>
+                                        <div className="rating">
+                                            <BasicRating />
+                                        </div>
+                                        <div className="couner_item">2 reviews</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.product_counter_reviews}>2 REVIEWS FOR ELDEN RING</div>
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <Review />
+                                </div>
+                                <div className="col-lg-6">
+                                    <Review />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={style.related_products}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-3">
+                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                            </div>
+                            <div className="col-lg-3">
+                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                            </div>
+                            <div className="col-lg-3">
+                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                            </div>
+                            <div className="col-lg-3">
+                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer />
         </>
