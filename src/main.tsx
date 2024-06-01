@@ -12,7 +12,7 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: '/your-repository-name/product-page',
+        path: '/your-repository-name/product-page/:id',
         element: <ProductSinglePage />,
     },
 ])

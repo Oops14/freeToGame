@@ -2,15 +2,15 @@ import styles from './intro.module.scss'
 import '../../../bootstrap/bootstrap-grid.scss'
 import slider_img from '../../../assets/slider/wd-vgs-slide-1-opt.jpg'
 
-import { InitialStateType } from '../../../features/games/gamesReducer'
 import { useSelector } from 'react-redux'
 import { RequestStatusType } from '../../../app/appReducer'
 import { AppRootStateType } from '../../../app/store'
 import { GameItemMini } from '../../../features/games/game-grid/GameItemMini'
 import CircularIndeterminate from '../progress-bar/CircularIndeterminate'
+import { GameInitialStateType } from '../../types/types'
 
 export const Intro = () => {
-    const games = useSelector<AppRootStateType, InitialStateType>((state) => state.games)
+    const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
     // Shuffle array

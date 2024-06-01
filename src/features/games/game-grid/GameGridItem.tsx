@@ -17,20 +17,20 @@ type GameGridItem = {
 export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton }) => {
     const dispatch = useAppDispatch()
 
-    const handleTitle = () => {
-        if (id) dispatch(getGameIdAC(id))
-    }
+    // const handleTitle = () => {
+    //     if (id) dispatch(getGameIdAC(id))
+    // }
 
     return (
         <div>
             <div className={styles.game_grid_item}>
                 <div className={styles.grid_image}>
-                    <Link onClick={handleTitle} to="/your-repository-name/product-page"></Link>
+                    <Link to={`/your-repository-name/product-page/${id}`}></Link>
                     <img src={img} alt="#" />
                 </div>
                 <div className={styles.game_details}>
                     <h5 className={styles.item_grid_title}>
-                        <Link onClick={handleTitle} to="/your-repository-name/product-page">
+                        <Link to={`/your-repository-name/product-page/${id}`}>
                             {title}
                         </Link>
                     </h5>

@@ -20,18 +20,23 @@ import { getGameByIdTC } from '../../../features/games/gamesReducer.ts'
 import { RequestStatusType } from '../../../app/appReducer.ts'
 import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
 import { GameDetails } from '../../types/types.ts'
+import { useParams } from 'react-router-dom'
 
 export const ProductSinglePage = () => {
-    const productId = useSelector<AppRootStateType, number | null>((state) => state.games.gameId)
+    // const productId = useSelector<AppRootStateType, number | null>((state) => state.games.gameId)
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
-    const info = useSelector<AppRootStateType, GameDetails>((state) => state.games.currentGameInfo)
+    const productInfo = useSelector<AppRootStateType, GameDetails>((state) => state.games.currentGameInfo)
     const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        if (typeof productId === 'number') dispatch(getGameByIdTC(productId))
+    const { id } = useParams();
 
-        console.log(info)
-    }, [productId, dispatch])
+    console.log(productInfo);
+    
+    useEffect(() => {
+        if (id) dispatch(getGameByIdTC(Number(id)))
+
+        console.log(id);
+    }, [])
 
     return (
         <>
