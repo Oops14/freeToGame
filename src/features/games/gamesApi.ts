@@ -13,6 +13,7 @@ export const gamesApi = {
         return axios.get<GameType[]>(`https://free-to-play-games-database.p.rapidapi.com/api/games`, gamesApiOptions)
     },
     gamesByCategory(category_name: string) {
+
         return axios.get<GameType[]>(
             `https://free-to-play-games-database.p.rapidapi.com/api/games?category=${category_name}`,
             gamesApiOptions

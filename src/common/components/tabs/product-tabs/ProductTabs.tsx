@@ -69,7 +69,7 @@ export const ProductTabs = () => {
                             {loader === 'succeeded' && shuffled.map((g, index) => {
                                 return (
                                     <div key={index} className={'col-lg-4'}>
-                                        <GameGridItem id={g.id} title={g.title} img={g.thumbnail} dev={g.developer} />
+                                        <GameGridItem id={g.id} title={g.title} img={g.thumbnail} dev={g.developer} categ={g.genre}/>
                                     </div>
                                 )
                             })}
