@@ -5,12 +5,12 @@ import BasicRating from '../../../common/components/rating/BasicRating.tsx'
 import { ButtonMain } from '../../../common/components/button/ButtonMain.tsx'
 
 type GameGridItem = {
-    id?: number
+    id: number
     title: string
     img: string
     dev?: string
     showButton?: boolean
-    categ?: string
+    categ: string
 }
 
 export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton, categ }) => {

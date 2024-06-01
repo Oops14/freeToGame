@@ -18,7 +18,7 @@ import { GameDetails, GameType } from '../../types/types.ts'
 import { useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { useLocation } from 'react-router'
-
+import {scrollToTop} from "../../utils/scrollToTop.ts";
 
 export const ProductSinglePage = () => {
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
@@ -27,15 +27,19 @@ export const ProductSinglePage = () => {
     const { id, categ } = useParams()
 
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)
-    const simmilarGames = gamesByCategory.slice(0, 4)
+
+    // get random games.
+    const simmilarGames = gamesByCategory.sort(() => 0.5 - Math.random()).slice(0, 4)
 
     // refresh the page.
     const location = useLocation()
+
 
     useEffect(() => {
         if (id) dispatch(getGameByIdTC(Number(id)))
         if (categ) dispatch(getCategoryGamesTC(categ))
 
+        scrollToTop()
     }, [location.key])
 
     const sliderSettings = {
