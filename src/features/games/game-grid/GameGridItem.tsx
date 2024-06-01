@@ -2,22 +2,23 @@ import styles from './gameGridItem.module.scss'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../../app/store.ts'
-import { getGameTitleAC } from '../gamesReducer.ts'
+import { getGameIdAC } from '../gamesReducer.ts'
 import BasicRating from '../../../common/components/rating/BasicRating.tsx'
 import { ButtonMain } from '../../../common/components/button/ButtonMain.tsx'
 
 type GameGridItem = {
+    id?: number
     title: string
     img: string
     dev?: string
     showButton?: boolean
 }
 
-export const GameGridItem: React.FC<GameGridItem> = ({ title, img, dev, showButton }) => {
+export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton }) => {
     const dispatch = useAppDispatch()
 
-    const handleTitle = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        dispatch(getGameTitleAC(e.currentTarget.innerText))
+    const handleTitle = () => {
+        if (id) dispatch(getGameIdAC(id))
     }
 
     return (

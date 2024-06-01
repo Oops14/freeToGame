@@ -4,9 +4,9 @@ import { GameGridItem } from '../../../../features/games/game-grid/GameGridItem.
 import { useEffect, useState } from 'react'
 import { RequestStatusType } from '../../../../app/appReducer.ts'
 import { useAppDispatch, AppRootStateType } from '../../../../app/store.ts'
-import { GameType } from '../../../../features/games/gamesApi.ts'
 import { getCategoryGamesTC } from '../../../../features/games/gamesReducer.ts'
 import CircularIndeterminate from '../../progress-bar/CircularIndeterminate.tsx'
+import { GameType } from '../../../types/types.ts'
 
 export const ProductTabs = () => {
     const dispatch = useAppDispatch()
@@ -69,7 +69,7 @@ export const ProductTabs = () => {
                             {loader === 'succeeded' && shuffled.map((g, index) => {
                                 return (
                                     <div key={index} className={'col-lg-4'}>
-                                        <GameGridItem title={g.title} img={g.thumbnail} dev={g.developer} />
+                                        <GameGridItem id={g.id} title={g.title} img={g.thumbnail} dev={g.developer} />
                                     </div>
                                 )
                             })}

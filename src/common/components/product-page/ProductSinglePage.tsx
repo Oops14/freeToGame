@@ -11,22 +11,34 @@ import advant_img4 from '../../../assets/product-page/4.svg'
 import desc_img from '../../../assets/descr_images/1.jpeg'
 import desc_img2 from '../../../assets/descr_images/2.jpeg'
 import desc_img3 from '../../../assets/descr_images/3.jpeg'
-import { AppRootStateType } from '../../../app/store.ts'
+import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
 import BasicRating from '../rating/BasicRating.tsx'
 import { Review } from '../../../features/review/Review.tsx'
 import { GameGridItem } from '../../../features/games/game-grid/GameGridItem.tsx'
 import temp_img from '../../../assets/w-vgs-rpg-starfield-430x553.jpg'
+import { getGameByIdTC } from '../../../features/games/gamesReducer.ts'
+import { RequestStatusType } from '../../../app/appReducer.ts'
+import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
+import { GameDetails } from '../../types/types.ts'
 
 export const ProductSinglePage = () => {
-    const prodInfo = useSelector<AppRootStateType, string>((state) => state.games.gameTitle)
+    const productId = useSelector<AppRootStateType, number | null>((state) => state.games.gameId)
+    const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+    const info = useSelector<AppRootStateType, GameDetails>((state) => state.games.currentGameInfo)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        console.log(prodInfo)
-    }, [])
+        if (typeof productId === 'number') dispatch(getGameByIdTC(productId))
+
+        console.log(info)
+    }, [productId, dispatch])
 
     return (
         <>
             <Header />
+
+            {loader === 'loading' && <LinearIndeterminate />}
+
             <div className={style.single_product}>
                 <div className={'container'}>
                     <div className={style.product_inner + ' ' + style.stretch}>
@@ -175,16 +187,16 @@ export const ProductSinglePage = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-3">
-                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                                <GameGridItem title="Starfield" img={temp_img} showButton={true} />
                             </div>
                             <div className="col-lg-3">
-                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                                <GameGridItem title="Starfield" img={temp_img} showButton={true} />
                             </div>
                             <div className="col-lg-3">
-                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                                <GameGridItem title="Starfield" img={temp_img} showButton={true} />
                             </div>
                             <div className="col-lg-3">
-                                <GameGridItem  title='Starfield' img={temp_img} showButton={true}/>
+                                <GameGridItem title="Starfield" img={temp_img} showButton={true} />
                             </div>
                         </div>
                     </div>
