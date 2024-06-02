@@ -8,11 +8,11 @@ import { ProductSinglePage } from './common/components/product-page/ProductSingl
 
 const router = createBrowserRouter([
     {
-        path: '/your-repository-name/',
+        path: '/freeToGame/',
         element: <App />,
     },
     {
-        path: '/your-repository-name/product-page/:categ/:id',
+        path: '/freeToGame/product-page/:categ/:id',
         element: <ProductSinglePage />,
     },
 ])

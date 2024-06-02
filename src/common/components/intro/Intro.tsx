@@ -1,7 +1,6 @@
 import styles from './intro.module.scss'
 import '../../../bootstrap/bootstrap-grid.scss'
 import slider_img from '../../../assets/slider/wd-vgs-slide-1-opt.jpg'
-
 import { useSelector } from 'react-redux'
 import { RequestStatusType } from '../../../app/appReducer'
 import { AppRootStateType } from '../../../app/store'
@@ -34,16 +33,19 @@ export const Intro = () => {
                             <h5>Free to play games</h5>
                             <div className={styles.games}>
                                 {loader === 'loading' && <CircularIndeterminate />}
-                                {loader === 'succeeded' && randomGames.map((game) => {
-                                    return (
-                                        <GameItemMini
-                                            key={game.id}
-                                            title={game.title}
-                                            img={game.thumbnail}
-                                            dev={game.developer}
-                                        />
-                                    )
-                                })}
+                                {loader === 'succeeded' &&
+                                    randomGames.map((game) => {
+                                        return (
+                                            <GameItemMini
+                                                id={game.id}
+                                                categ={game.genre}
+                                                key={game.id}
+                                                title={game.title}
+                                                img={game.thumbnail}
+                                                dev={game.developer}
+                                            />
+                                        )
+                                    })}
                             </div>
                         </div>
                     </div>

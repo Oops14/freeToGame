@@ -19,12 +19,12 @@ export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, show
         <div>
             <div className={styles.game_grid_item}>
                 <div className={styles.grid_image}>
-                    <Link to={`/your-repository-name/product-page/${categ}/${id}`}></Link>
+                    <Link to={`/freeToGame/product-page/${categ}/${id}`}></Link>
                     <img src={img} alt="#" />
                 </div>
                 <div className={styles.game_details}>
                     <h5 className={styles.item_grid_title}>
-                        <Link to={`/your-repository-name/product-page/${categ}/${id}`}>
+                        <Link to={`/freeToGame/product-page/${categ}/${id}`}>
                             {title}
                         </Link>
                     </h5>
