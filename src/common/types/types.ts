@@ -45,3 +45,13 @@ export type GameDetails = {
         image: string;
     }[];
 };
+
+export type Categories = {
+    title: string
+}
+
+export type ArticlesItems = {
+    date: number
+    mounth: string
+    title: string
+}

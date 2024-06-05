@@ -46,10 +46,6 @@ export const getCurrentGameAC = (data: GameDetails) => ({ type: GET_CURRENT_GAME
  *
  * @param {Function} dispatch - The dispatch function from Redux.
  *
- * It first dispatches an action to set the loader status to 'loading'.
- * Then it makes an API call to fetch games.
- * If the API call is successful, it dispatches an action to set the games with the received data and sets the loader status to 'succeeded'.
- * If the API call fails, it alerts the error and dispatches an action to set the loader status to 'failed'.
  */
 export const setGamesTC = () => (dispatch: Dispatch<any>) => {
     dispatch(setLoaderAC('loading'))
@@ -74,20 +70,22 @@ export const setGamesTC = () => (dispatch: Dispatch<any>) => {
  * @param {string} category - The category of games to fetch.
  * @returns {Function} A thunk function that uses dispatch to control the flow of the API call.
  */
-export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<any>) => {
-    dispatch(setLoaderAC('loading'))
+export const getCategoryGamesTC = (category: string) => {
+    return (dispatch: Dispatch<any>) => {
+        dispatch(setLoaderAC('loading'))
 
-    gamesApi
-        .gamesByCategory(category)
-        .then((res) => {
-            dispatch(getGamesByCategoryAC(res.data))
-            
-            dispatch(setLoaderAC('succeeded'))
-        })
-        .catch((err) => {
-            alert(err)
-            dispatch(setLoaderAC('failed'))
-        })
+        gamesApi
+            .gamesByCategory(category)
+            .then((res) => {
+                dispatch(getGamesByCategoryAC(res.data))
+
+                dispatch(setLoaderAC('succeeded'))
+            })
+            .catch((err) => {
+                alert(err)
+                dispatch(setLoaderAC('failed'))
+            })
+    }
 }
 
 /**
@@ -97,17 +95,19 @@ export const getCategoryGamesTC = (category: string) => (dispatch: Dispatch<any>
  * @param {number} id - The ID of the game to fetch.
  * @returns {Function} A thunk function that uses dispatch to control the flow of the API call.
  */
-export const getGameByIdTC = (id: number) => (dispatch: Dispatch<any>) => {
-    dispatch(setLoaderAC('loading'))
+export const getGameByIdTC = (id: number) => {
+    return (dispatch: Dispatch<any>) => {
+        dispatch(setLoaderAC('loading'))
 
-    gamesApi
-        .getSpecificGameInfo(id)
-        .then((res) => {
-            dispatch(getCurrentGameAC(res.data))
+        gamesApi
+            .getSpecificGameInfo(id)
+            .then((res) => {
+                dispatch(getCurrentGameAC(res.data))
 
-            dispatch(setLoaderAC('succeeded'))
-        })
-        .catch((err) => {
-            alert(err)
-        })
+                dispatch(setLoaderAC('succeeded'))
+            })
+            .catch((err) => {
+                alert(err)
+            })
+    }
 }

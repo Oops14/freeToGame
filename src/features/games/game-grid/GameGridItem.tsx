@@ -14,7 +14,6 @@ type GameGridItem = {
 }
 
 export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton, categ }) => {
-
     return (
         <div>
             <div className={styles.game_grid_item}>
@@ -24,9 +23,7 @@ export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, show
                 </div>
                 <div className={styles.game_details}>
                     <h5 className={styles.item_grid_title}>
-                        <Link to={`/freeToGame/product-page/${categ}/${id}`}>
-                            {title}
-                        </Link>
+                        <Link to={`/freeToGame/product-page/${categ}/${id}`}>{title}</Link>
                     </h5>
                     <div className="stars">
                         <BasicRating />

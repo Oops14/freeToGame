@@ -15,9 +15,7 @@ export const ProductTabs = () => {
         { title: 'Shooter' },
         { title: 'Strategy' },
         { title: 'MMORPG' },
-        { title: 'Battle Royale' },
         { title: 'MOBA' },
-        { title: 'Card Game' },
         { title: 'Sports' },
     ]
     const [activeTab, setActiveTab] = useState(categories[0].title)
