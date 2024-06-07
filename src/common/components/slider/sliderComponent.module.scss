@@ -1,0 +1,36 @@
+.category_item_wrapper {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.articles_inner {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col_slider {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.slider_block{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.screenshots {
+  position: relative;
+}
+
+.screenshots:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 9999;
+}

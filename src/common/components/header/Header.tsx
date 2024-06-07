@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
     return (
@@ -15,12 +16,8 @@ export const Header = () => {
                     </div>
                     <div className={style.header_col_center}>
                         <ul className={style.header_menu}>
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Games</a>
-                            </li>
+                            <Link to="/freeToGame/">Home</Link>
+                            <Link to="/freeToGame/games">Games</Link>
                         </ul>
                     </div>
                     <div className={style.header_col_right}>
