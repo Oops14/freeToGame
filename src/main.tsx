@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { Provider } from 'react-redux'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './app/App'
 import { store } from './app/store'
 import { ProductSinglePage } from './common/components/product-page/ProductSinglePage'
+import { Archive } from './common/components/archive/Archive'
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: '/freeToGame/product-page/:categ/:id',
         element: <ProductSinglePage />,
+    },
+    {
+        path: '/freeToGame/games',
+        element: <Archive />,
     },
 ])
 

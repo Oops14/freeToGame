@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import BasicRating from '../../../common/components/rating/BasicRating.tsx'
 import { ButtonMain } from '../../../common/components/button/ButtonMain.tsx'
 
-type GameGridItem = {
+export type GameGridItem = {
     id: number
     title: string
     img: string

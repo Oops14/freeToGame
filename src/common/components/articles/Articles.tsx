@@ -27,7 +27,7 @@ export const Articles = () => {
             <div className="container">
                 <h3>Our Latest Articles</h3>
                 <div className={style.articles_inner}>
-                    <SliderComponent elements={articles} slidesToShow={3} articles={true}/>
+                    <SliderComponent elements={articles} slidesToShow={3} articles={true} slidesToScroll={1}/>
                 </div>
             </div>
         </section>

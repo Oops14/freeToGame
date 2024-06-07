@@ -10,7 +10,6 @@ import advant_img4 from '../../../assets/product-page/4.svg'
 import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
 import BasicRating from '../rating/BasicRating.tsx'
 import { Review } from '../../../features/review/Review.tsx'
-import { GameGridItem } from '../../../features/games/game-grid/GameGridItem.tsx'
 import { getCategoryGamesTC, getGameByIdTC } from '../../../features/games/gamesReducer.ts'
 import { RequestStatusType } from '../../../app/appReducer.ts'
 import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
@@ -19,6 +18,7 @@ import { useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { useLocation } from 'react-router'
 import { scrollToTop } from '../../utils/scrollToTop.ts'
+import {SliderComponent} from "../slider/SliderComponent.tsx";
 
 export const ProductSinglePage = () => {
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
@@ -29,7 +29,7 @@ export const ProductSinglePage = () => {
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)
 
     // get random games.
-    const simmilarGames = gamesByCategory.sort(() => 0.5 - Math.random()).slice(0, 4)
+    const simmilarGames = gamesByCategory.sort(() => 0.5 - Math.random()).slice(0, 12)
 
     // refresh the page.
     const location = useLocation()
@@ -121,6 +121,11 @@ export const ProductSinglePage = () => {
                     <div className="container">
                         <h4>Description</h4>
                         <div className={style.desc_images}>
+                            {
+                                // *
+                                // TODO: SET THE SLIDER  VIA COMPONENT.
+                                // *
+                            }
                             <Slider {...sliderSettings}>
                                 {productInfo.screenshots?.map((screen) => {
                                     return (
@@ -184,22 +189,7 @@ export const ProductSinglePage = () => {
                 </div>
                 <div className={style.related_products}>
                     <div className="container">
-                        <div className="row">
-                            {simmilarGames.map((game) => {
-                                return (
-                                    <div key={game.id} className="col-lg-3">
-                                        <GameGridItem
-                                            id={game.id}
-                                            title={game.title}
-                                            img={game.thumbnail}
-                                            dev={game.developer}
-                                            categ={game.genre}
-                                            showButton={true}
-                                        />
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        {<SliderComponent elements={simmilarGames} slidesToShow={4} screenshots={true} slidesToScroll={3}/>}
                     </div>
                 </div>
             </div>

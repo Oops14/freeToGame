@@ -14,7 +14,7 @@ export const Categories = () => {
         <section className={style.categories}>
             <div className="container">
                 <div className={style.slider}>
-                    <SliderComponent elements={categories} slidesToShow={5} categories={true}/>
+                    <SliderComponent elements={categories} slidesToShow={5} categories={true} slidesToScroll={1}/>
                 </div>
             </div>
         </section>

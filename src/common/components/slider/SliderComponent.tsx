@@ -1,27 +1,37 @@
-import {CategoriesGridItem} from '../../../features/category-item/CategoriesGridItem.tsx'
+import { CategoriesGridItem } from '../../../features/category-item/CategoriesGridItem.tsx'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './slider.scss'
 import Slider from 'react-slick'
 import React from 'react'
-import {ArticlesItems, Categories} from '../../types/types.ts'
+import { ArticlesItems, Categories, GameType } from '../../types/types.ts'
 import ArticleItem from '../../../features/article/ArticleItem.tsx'
 import style from './sliderComponent.module.scss'
+import { GameGridItem } from '../../../features/games/game-grid/GameGridItem.tsx'
 
 type SliderComponent = {
-    elements: Categories[] | ArticlesItems[]
+    elements: Categories[] | ArticlesItems[] | GameType[]
     slidesToShow: number
     categories?: boolean
     articles?: boolean
+    screenshots?: boolean
+    slidesToScroll: number
 }
 
-export const SliderComponent: React.FC<SliderComponent> = ({elements, slidesToShow, categories, articles}) => {
+export const SliderComponent: React.FC<SliderComponent> = ({
+    elements,
+    slidesToShow,
+    categories,
+    articles,
+    screenshots,
+    slidesToScroll,
+}) => {
     const sliderSettings = {
         dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: slidesToShow,
-        slidesToScroll: 1,
+        slidesToScroll: slidesToScroll,
     }
 
     return (
@@ -30,9 +40,24 @@ export const SliderComponent: React.FC<SliderComponent> = ({elements, slidesToSh
                 {elements.map((el, index) => {
                     return (
                         <div key={index} className="slider_col">
-                            <div className={`slider_col ${ categories && style.category_item_wrapper} ${articles && style.col_slider}`}>
-                                    {categories && <CategoriesGridItem title={el.title}/>}
-                                    {articles && <ArticleItem/>}
+                            <div
+                                className={` 
+                            ${categories && style.category_item_wrapper} 
+                            ${articles && style.col_slider}
+                            ${screenshots && style.screenshots}
+                            `}>
+                                {categories && <CategoriesGridItem title={el.title} />}
+                                {articles && <ArticleItem />}
+                                {screenshots && (
+                                    <GameGridItem
+                                        id={el.id}
+                                        title={el.title}
+                                        img={el.thumbnail}
+                                        dev={el.developer}
+                                        categ={el.genre}
+                                        showButton={true}
+                                    />
+                                )}
                             </div>
                         </div>
                     )
@@ -45,3 +70,4 @@ export const SliderComponent: React.FC<SliderComponent> = ({elements, slidesToSh
 // <div className={`slider_col ${style.col_article}`}>
 //     <ArticleItem/>
 // </div>
+
