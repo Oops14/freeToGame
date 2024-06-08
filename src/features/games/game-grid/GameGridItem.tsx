@@ -14,6 +14,8 @@ export type GameGridItem = {
 }
 
 export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton, categ }) => {
+    categ = categ.split(' ').join('-').toLowerCase()
+
     return (
         <div>
             <div className={styles.game_grid_item}>

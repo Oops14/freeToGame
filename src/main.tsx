@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         element: <ProductSinglePage />,
     },
     {
-        path: '/freeToGame/games',
+        path: '/freeToGame/games/',
         element: <Archive />,
     },
 ])

@@ -17,7 +17,7 @@ export const Header = () => {
                     <div className={style.header_col_center}>
                         <ul className={style.header_menu}>
                             <Link to="/freeToGame/">Home</Link>
-                            <Link to="/freeToGame/games">Games</Link>
+                            <Link to="/freeToGame/games/">Games</Link>
                         </ul>
                     </div>
                     <div className={style.header_col_right}>
