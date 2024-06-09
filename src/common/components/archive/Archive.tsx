@@ -21,8 +21,8 @@ export const Archive = () => {
 
     // Read gamesPerPage from localStorage when component mounts
     const [gamesPerPage, setGamesPerPage] = useState(() => {
-        const savedGamesPerPage = localStorage.getItem('gamesPerPage');
-        return savedGamesPerPage ? parseInt(savedGamesPerPage) : gamesPerPageOptions[0];
+        const savedGamesPerPage = localStorage.getItem('gamesPerPage')
+        return savedGamesPerPage ? parseInt(savedGamesPerPage) : gamesPerPageOptions[0]
     })
 
     // Navigation.
@@ -30,6 +30,7 @@ export const Archive = () => {
     const navigate = useNavigate()
     const query = new URLSearchParams(location.search)
     const pageQuery = query.get('page')
+    const perPageQuery = query.get('per_page')
 
     const [currentPage, setCurrentPage] = useState(pageQuery ? parseInt(pageQuery) : 1)
 
@@ -40,23 +41,29 @@ export const Archive = () => {
     // Pagination.
     const changePage = (pageNumber: number) => {
         setCurrentPage(pageNumber)
-        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`);
+        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`)
 
         scrollToTop()
     }
 
     const changeGamesPerPage = (number: number) => {
         setGamesPerPage(number)
-        navigate(`?page=${currentPage}&per_page=${number}`);
+        navigate(`?page=${currentPage}&per_page=${number}`)
     }
+
+    useEffect(() => {
+        dispatch(setGamesTC())
+        scrollToTop()
+    }, [])
 
     // Save gamesPerPage to localStorage whenever it changes
     useEffect(() => {
-        dispatch(setGamesTC())
-        localStorage.setItem('gamesPerPage', gamesPerPage.toString());
+        if (!perPageQuery) {
+            setGamesPerPage(gamesPerPageOptions[0])
+        }
 
-        scrollToTop()
-    }, [gamesPerPage, dispatch])
+        localStorage.setItem('gamesPerPage', gamesPerPage.toString())
+    }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery])
 
     return (
         <>
@@ -70,7 +77,6 @@ export const Archive = () => {
                             <div className={style.grid_view}>
                                 <span>Show: </span>
                                 {gamesPerPageOptions.map((option) => {
-                                    
                                     return (
                                         <div
                                             className={`${style.view_grid_item} ${gamesPerPage === option ? style.active_grid : ''}`}

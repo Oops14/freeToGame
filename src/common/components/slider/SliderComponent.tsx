@@ -48,7 +48,7 @@ export const SliderComponent: React.FC<SliderComponent> = ({
                             `}>
                                 {categories && <CategoriesGridItem title={el.title} />}
                                 {articles && <ArticleItem />}
-                                {screenshots && (
+                                {screenshots && 'thumbnail' in el && (
                                     <GameGridItem
                                         id={el.id}
                                         title={el.title}
