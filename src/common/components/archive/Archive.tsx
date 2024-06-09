@@ -10,34 +10,53 @@ import { GameInitialStateType } from '../../types/types'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setGamesTC } from '../../../features/games/gamesReducer'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { scrollToTop } from '../../utils/scrollToTop'
 
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const dispatch = useAppDispatch()
-    const { page } = useParams()
+
+    const gamesPerPageOptions = [12, 21, 33]
+
+    // Read gamesPerPage from localStorage when component mounts
+    const [gamesPerPage, setGamesPerPage] = useState(() => {
+        const savedGamesPerPage = localStorage.getItem('gamesPerPage');
+        return savedGamesPerPage ? parseInt(savedGamesPerPage) : gamesPerPageOptions[0];
+    })
 
     // Navigation.
     const location = useLocation()
     const navigate = useNavigate()
     const query = new URLSearchParams(location.search)
     const pageQuery = query.get('page')
-    
+
     const [currentPage, setCurrentPage] = useState(pageQuery ? parseInt(pageQuery) : 1)
-    const gamesPerPage = 21
 
     const indexOfLastGame = currentPage * gamesPerPage
     const indexOfFirstGame = indexOfLastGame - gamesPerPage
     const currentGames = games.games.slice(indexOfFirstGame, indexOfLastGame)
 
-    const changePage = (pageNumber) => {
+    // Pagination.
+    const changePage = (pageNumber: number) => {
         setCurrentPage(pageNumber)
-        navigate(`?page=${pageNumber}`)
+        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`);
+
+        scrollToTop()
     }
 
+    const changeGamesPerPage = (number: number) => {
+        setGamesPerPage(number)
+        navigate(`?page=${currentPage}&per_page=${number}`);
+    }
+
+    // Save gamesPerPage to localStorage whenever it changes
     useEffect(() => {
         dispatch(setGamesTC())
-    }, [])
+        localStorage.setItem('gamesPerPage', gamesPerPage.toString());
+
+        scrollToTop()
+    }, [gamesPerPage, dispatch])
 
     return (
         <>
@@ -48,6 +67,19 @@ export const Archive = () => {
                     <div className={style.page_tools}>
                         <h3>All Games</h3>
                         <div className={style.tools_inner}>
+                            <div className={style.grid_view}>
+                                <span>Show: </span>
+                                {gamesPerPageOptions.map((option) => {
+                                    
+                                    return (
+                                        <div
+                                            className={`${style.view_grid_item} ${gamesPerPage === option ? style.active_grid : ''}`}
+                                            onClick={() => changeGamesPerPage(option)}>
+                                            {option}
+                                        </div>
+                                    )
+                                })}
+                            </div>
                             <div className={style.grid_view}>
                                 <div className={style.view_grid_item}>
                                     <img src={line_grid} alt="line" />
@@ -79,7 +111,7 @@ export const Archive = () => {
                             })}
                         </div>
                     </div>
-                    <div className="pagination">
+                    <div className={style.pagination}>
                         {Array(Math.ceil(games.games.length / gamesPerPage))
                             .fill()
                             .map((_, index) => (
