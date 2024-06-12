@@ -117,9 +117,11 @@ export const Archive = () => {
                             })}
                         </div>
                     </div>
+
+                    {/* TODO: Make pagination as component, add "active" button */}
                     <div className={style.pagination}>
                         {Array(Math.ceil(games.games.length / gamesPerPage))
-                            .fill()
+                            .fill(undefined)
                             .map((_, index) => (
                                 <button onClick={() => changePage(index + 1)}>{index + 1}</button>
                             ))}
