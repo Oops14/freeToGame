@@ -1,4 +1,4 @@
-import BasicRating from '../../../common/components/rating/BasicRating'
+import BasicRating from '../../../../common/components/rating/BasicRating.tsx'
 import styles from './gameItemMini.module.scss'
 import { Link } from 'react-router-dom'
 import React from 'react'

@@ -1,6 +1,6 @@
 import { Dispatch } from 'react'
 import { setLoaderAC } from '../../app/appReducer'
-import { gamesApi } from './gamesApi'
+import { gamesApi } from './api/gamesApi.ts'
 import { GameDetails, GameInitialStateType, GameType } from '../../common/types/types'
 
 // Cases
