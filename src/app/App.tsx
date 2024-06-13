@@ -6,7 +6,7 @@ import { Categories } from '../common/components/categories/Categories'
 import { Footer } from '../common/components/footer/Footer'
 import { Intro } from '../common/components/intro/Intro'
 import { ProductTabs } from '../common/components/tabs/product-tabs/ProductTabs'
-import { setGamesTC } from '../features/games/gamesReducer'
+import { setGamesTC } from '../features/games/model/gamesReducer.ts'
 import { useAppDispatch } from './store'
 
 

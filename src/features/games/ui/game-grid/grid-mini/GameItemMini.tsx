@@ -1,9 +1,8 @@
-import BasicRating from '../../../../common/components/rating/BasicRating.tsx'
+import BasicRating from '../../../../../common/components/rating/BasicRating.tsx'
 import styles from './gameItemMini.module.scss'
 import { Link } from 'react-router-dom'
-import React from 'react'
 
-type GameItemMini = {
+type Props = {
     id: number
     title: string
     categ: string
@@ -11,7 +10,7 @@ type GameItemMini = {
     dev: string
 }
 
-export const GameItemMini: React.FC<GameItemMini> = ({ id, title, img, dev, categ }) => {
+export const GameItemMini = ({ id, title, img, dev, categ } : Props) => {
     return (
         <div className={styles.game_item_mini}>
             <div className={styles.image}>

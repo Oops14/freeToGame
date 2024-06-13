@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GameDetails, GameType } from '../../common/types/types'
+import { GameDetails, GameType } from '../../../common/types/types.ts'
 
 const gamesApiOptions = {
     headers: {

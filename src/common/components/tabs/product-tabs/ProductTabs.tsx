@@ -1,16 +1,17 @@
 import style from './product-tabs.module.scss'
 import { useSelector } from 'react-redux'
-import { GameGridItem } from '../../../../features/games/game-grid/GameGridItem.tsx'
+import { GameGridItem } from '../../../../features/games/ui/game-grid/GameGridItem.tsx'
 import { useEffect, useState } from 'react'
 import { RequestStatusType } from '../../../../app/appReducer.ts'
 import { useAppDispatch, AppRootStateType } from '../../../../app/store.ts'
-import { getCategoryGamesTC } from '../../../../features/games/gamesReducer.ts'
+import { getCategoryGamesTC } from '../../../../features/games/model/gamesReducer.ts'
 import CircularIndeterminate from '../../progress-bar/CircularIndeterminate.tsx'
 import { GameType } from '../../../types/types.ts'
 
 export const ProductTabs = () => {
     const dispatch = useAppDispatch()
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+
     const categories = [
         { title: 'Shooter' },
         { title: 'Strategy' },
@@ -18,6 +19,7 @@ export const ProductTabs = () => {
         { title: 'MOBA' },
         { title: 'Sports' },
     ]
+
     const [activeTab, setActiveTab] = useState(categories[0].title)
 
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
-import { setLoaderAC } from '../../app/appReducer'
-import { gamesApi } from './api/gamesApi.ts'
-import { GameDetails, GameInitialStateType, GameType } from '../../common/types/types'
+import { setLoaderAC } from '../../../app/appReducer.ts'
+import { gamesApi } from '../api/gamesApi.ts'
+import { GameDetails, GameInitialStateType, GameType } from '../../../common/types/types.ts'
 
 // Cases
 const SET_GAMES = 'APP/SET-GAMES'

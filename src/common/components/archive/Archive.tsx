@@ -4,52 +4,33 @@ import line_grid from '../../../assets/line-3-svgrepo-com111.svg'
 import grid_3 from '../../../assets/grid-svgrepo-com3.svg'
 import grid_4 from '../../../assets/grid-16-svgrepo-com444.svg'
 import style from './archive.module.scss'
-import { GameGridItem } from '../../../features/games/game-grid/GameGridItem'
+import { GameGridItem } from '../../../features/games/ui/game-grid/GameGridItem'
 import { AppRootStateType, useAppDispatch } from '../../../app/store'
 import { GameInitialStateType } from '../../types/types'
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { setGamesTC } from '../../../features/games/gamesReducer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { setGamesTC } from '../../../features/games/model/gamesReducer.ts'
 import { scrollToTop } from '../../utils/scrollToTop'
+import { useNavigation } from '../../hooks/useNavigation.ts'
+import { GridViewItem } from './archive-grid-view/GridViewItem.tsx'
+import { Pagination } from '../pagination/Pagination.tsx'
 
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const dispatch = useAppDispatch()
 
-    const gamesPerPageOptions = [12, 21, 33]
+    const {
+        changePage,
+        changeGamesPerPage,
+        indexOfFirstGame,
+        indexOfLastGame,
+        gamesPerPage,
+        perPageQuery,
+        setGamesPerPage,
+        gamesPerPageOptions,
+    } = useNavigation()
 
-    // Read gamesPerPage from localStorage when component mounts
-    const [gamesPerPage, setGamesPerPage] = useState(() => {
-        const savedGamesPerPage = localStorage.getItem('gamesPerPage')
-        return savedGamesPerPage ? parseInt(savedGamesPerPage) : gamesPerPageOptions[0]
-    })
-
-    // Navigation.
-    const location = useLocation()
-    const navigate = useNavigate()
-    const query = new URLSearchParams(location.search)
-    const pageQuery = query.get('page')
-    const perPageQuery = query.get('per_page')
-
-    const [currentPage, setCurrentPage] = useState(pageQuery ? parseInt(pageQuery) : 1)
-
-    const indexOfLastGame = currentPage * gamesPerPage
-    const indexOfFirstGame = indexOfLastGame - gamesPerPage
     const currentGames = games.games.slice(indexOfFirstGame, indexOfLastGame)
-
-    // Pagination.
-    const changePage = (pageNumber: number) => {
-        setCurrentPage(pageNumber)
-        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`)
-
-        scrollToTop()
-    }
-
-    const changeGamesPerPage = (number: number) => {
-        setGamesPerPage(number)
-        navigate(`?page=${currentPage}&per_page=${number}`)
-    }
 
     useEffect(() => {
         dispatch(setGamesTC())
@@ -76,9 +57,10 @@ export const Archive = () => {
                         <div className={style.tools_inner}>
                             <div className={style.grid_view}>
                                 <span>Show: </span>
-                                {gamesPerPageOptions.map((option) => {
+                                {gamesPerPageOptions.map((option, index) => {
                                     return (
                                         <div
+                                            key={index}
                                             className={`${style.view_grid_item} ${gamesPerPage === option ? style.active_grid : ''}`}
                                             onClick={() => changeGamesPerPage(option)}>
                                             {option}
@@ -87,15 +69,9 @@ export const Archive = () => {
                                 })}
                             </div>
                             <div className={style.grid_view}>
-                                <div className={style.view_grid_item}>
-                                    <img src={line_grid} alt="line" />
-                                </div>
-                                <div className={style.view_grid_item}>
-                                    <img className={style.grid_of_3} src={grid_3} alt="line" />
-                                </div>
-                                <div className={style.view_grid_item}>
-                                    <img className={style.grid_of_4} src={grid_4} alt="line" />
-                                </div>
+                                <GridViewItem class={style.view_grid_item} img={line_grid} />
+                                <GridViewItem class={style.view_grid_item} classImg={style.grid_of_3} img={grid_3} />
+                                <GridViewItem class={style.view_grid_item} classImg={style.grid_of_4} img={grid_4} />
                             </div>
                         </div>
                     </div>
@@ -117,15 +93,7 @@ export const Archive = () => {
                             })}
                         </div>
                     </div>
-
-                    {/* TODO: Make pagination as component, add "active" button */}
-                    <div className={style.pagination}>
-                        {Array(Math.ceil(games.games.length / gamesPerPage))
-                            .fill(undefined)
-                            .map((_, index) => (
-                                <button onClick={() => changePage(index + 1)}>{index + 1}</button>
-                            ))}
-                    </div>
+                    <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
                 </div>
             </div>
         </>

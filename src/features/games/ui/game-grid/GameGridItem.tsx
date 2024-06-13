@@ -1,10 +1,9 @@
 import styles from './gameGridItem.module.scss'
-import React from 'react'
 import { Link } from 'react-router-dom'
-import BasicRating from '../../../common/components/rating/BasicRating.tsx'
-import { ButtonMain } from '../../../common/components/button/ButtonMain.tsx'
+import BasicRating from '../../../../common/components/rating/BasicRating.tsx'
+import { ButtonMain } from '../../../../common/components/button/ButtonMain.tsx'
 
-export type GameGridItem = {
+export type Props = {
     id: number
     title: string
     img: string
@@ -13,8 +12,13 @@ export type GameGridItem = {
     categ: string
 }
 
-export const GameGridItem: React.FC<GameGridItem> = ({ id, title, img, dev, showButton, categ }) => {
-    categ = categ.split(' ').join('-').toLowerCase()
+export const GameGridItem = ({ id, title, img, dev, showButton, categ }: Props) => {
+    // Fix the issue with the "-mmorpg" category.
+    if (categ.split(' ').join('-').toLowerCase().slice(0, 1) === '-') {
+        categ = categ.split(' ').join('-').toLowerCase().substring(1)
+    } else {
+        categ = categ.split(' ').join('-').toLowerCase()
+    }
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import BasicRating from '../../../common/components/rating/BasicRating.tsx'
+import BasicRating from '../../common/components/rating/BasicRating.tsx'
 import style from './review.module.scss'
 
 export const Review = () => {

@@ -4,7 +4,7 @@ import slider_img from '../../../assets/slider/wd-vgs-slide-1-opt.jpg'
 import { useSelector } from 'react-redux'
 import { RequestStatusType } from '../../../app/appReducer'
 import { AppRootStateType } from '../../../app/store'
-import { GameItemMini } from '../../../features/games/game-grid/GameItemMini'
+import { GameItemMini } from '../../../features/games/ui/game-grid/grid-mini/GameItemMini.tsx'
 import CircularIndeterminate from '../progress-bar/CircularIndeterminate'
 import { GameInitialStateType } from '../../types/types'
 

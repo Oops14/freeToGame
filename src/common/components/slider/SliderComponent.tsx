@@ -7,7 +7,7 @@ import React from 'react'
 import { ArticlesItems, Categories, GameType } from '../../types/types.ts'
 import ArticleItem from '../../../features/article/ArticleItem.tsx'
 import style from './sliderComponent.module.scss'
-import { GameGridItem } from '../../../features/games/game-grid/GameGridItem.tsx'
+import { GameGridItem } from '../../../features/games/ui/game-grid/GameGridItem.tsx'
 
 type SliderComponent = {
     elements: Categories[] | ArticlesItems[] | GameType[]

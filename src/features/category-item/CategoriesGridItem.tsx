@@ -1,11 +1,11 @@
 import cat_img from "../../assets/action_cat.jpeg";
 import style from "./category-grid-item.module.scss";
 
-type CategoriesGridItemType = {
+type Props = {
     title: string
 }
 
-export const CategoriesGridItem: React.FC<CategoriesGridItemType> = ({ title }) => {
+export const CategoriesGridItem = ({ title }: Props) => {
     return (
         <div className={style.category_grid_item}>
             <div className={style.category_name}>
