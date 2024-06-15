@@ -18,6 +18,10 @@ import { Pagination } from '../pagination/Pagination.tsx'
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const dispatch = useAppDispatch()
+    const [currentGrid, setCurrentGrid] = useState(() => {
+        const grid = localStorage.getItem('grid_view');
+        return grid ? JSON.parse(grid) : 'col-lg-4'
+    })
 
     const {
         changePage,
@@ -32,7 +36,6 @@ export const Archive = () => {
 
     const currentGames = games.games.slice(indexOfFirstGame, indexOfLastGame)
 
-    const [currentGrid, setCurrentGrid] = useState<string>('col-lg-4')
     const changeGridView = (view: string) => {
         setCurrentGrid(view)
     }
@@ -49,7 +52,9 @@ export const Archive = () => {
         }
 
         localStorage.setItem('gamesPerPage', gamesPerPage.toString())
-    }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery])
+        localStorage.setItem('grid_view', JSON.stringify(currentGrid));
+
+    }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery, currentGrid])
 
     return (
         <>
