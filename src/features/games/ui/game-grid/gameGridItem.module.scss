@@ -2,6 +2,24 @@
   margin-bottom: 15px;
 }
 
+.game_grid_item_alternative {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #efefef;
+  border-radius: 10px;
+  padding-right: 10px;
+
+  margin-bottom: 30px;
+
+  .game_details {
+    width: 400px;
+    text-align: right;
+  }
+}
+
+
 .grid_image {
   position: relative;
   margin-bottom: 5px;

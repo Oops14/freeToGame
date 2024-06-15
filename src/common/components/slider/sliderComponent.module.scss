@@ -22,9 +22,11 @@
 
 .screenshots {
   position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.screenshots:before {
+.screenshots > div > div:first-child:before {
   content: '';
   position: absolute;
   top: 0;

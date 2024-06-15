@@ -1,4 +1,4 @@
-import art_img from '../../assets/articles/1.jpg'
+import art_img from '../../../assets/articles/1.jpg'
 import style from './articleItem.module.scss'
 
 const ArticleItem = () => {

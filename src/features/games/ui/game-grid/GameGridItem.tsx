@@ -10,10 +10,11 @@ export type Props = {
     dev?: string
     showButton?: boolean
     categ: string
+    alternativeDesign?: boolean
 }
 
-export const GameGridItem = ({ id, title, img, dev, showButton, categ }: Props) => {
-    // Fix the issue with the "-mmorpg" category.
+export const GameGridItem = ({ id, title, img, dev, showButton, categ, alternativeDesign }: Props) => {
+    // Fix the issue with the "-mmorpg" category or categories with double string.
     if (categ.split(' ').join('-').toLowerCase().slice(0, 1) === '-') {
         categ = categ.split(' ').join('-').toLowerCase().substring(1)
     } else {
@@ -21,8 +22,7 @@ export const GameGridItem = ({ id, title, img, dev, showButton, categ }: Props) 
     }
 
     return (
-        <div>
-            <div className={styles.game_grid_item}>
+            <div className={alternativeDesign ? `${styles.game_grid_item_alternative}` : `${styles.game_grid_item}`}>
                 <div className={styles.grid_image}>
                     <Link to={`/freeToGame/product-page/${categ}/${id}`}></Link>
                     <img src={img} alt="#" />
@@ -38,6 +38,5 @@ export const GameGridItem = ({ id, title, img, dev, showButton, categ }: Props) 
                     {showButton && <ButtonMain />}
                 </div>
             </div>
-        </div>
     )
 }

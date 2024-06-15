@@ -9,7 +9,7 @@ import advant_img3 from '../../../assets/product-page/3.svg'
 import advant_img4 from '../../../assets/product-page/4.svg'
 import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
 import BasicRating from '../rating/BasicRating.tsx'
-import { Review } from '../../../features/review/Review.tsx'
+import { Review } from '../../../features/review/ui/Review.tsx'
 import { getCategoryGamesTC, getGameByIdTC } from '../../../features/games/model/gamesReducer.ts'
 import { RequestStatusType } from '../../../app/appReducer.ts'
 import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
@@ -18,19 +18,16 @@ import { useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { useLocation } from 'react-router'
 import { scrollToTop } from '../../utils/scrollToTop.ts'
-import {SliderComponent} from "../slider/SliderComponent.tsx";
+import { SliderComponent } from '../slider/SliderComponent.tsx'
 
 export const ProductSinglePage = () => {
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const productInfo = useSelector<AppRootStateType, GameDetails>((state) => state.games.currentGameInfo)
     const dispatch = useAppDispatch()
     const { id, categ } = useParams()
-
     const gamesByCategory = useSelector<AppRootStateType, GameType[]>((state) => state.games.gamesByCategory)
-
     // get random games.
     const simmilarGames = gamesByCategory.sort(() => 0.5 - Math.random()).slice(0, 12)
-
     // refresh the page.
     const location = useLocation()
 
@@ -189,7 +186,17 @@ export const ProductSinglePage = () => {
                 </div>
                 <div className={style.related_products}>
                     <div className="container">
-                        {<SliderComponent elements={simmilarGames} slidesToShow={4} screenshots={true} slidesToScroll={3}/>}
+                        <div style={{
+                            marginRight: "-15px",
+                            marginLeft: "-15px"
+                        }}>
+                            <SliderComponent
+                                elements={simmilarGames}
+                                slidesToShow={4}
+                                screenshots={true}
+                                slidesToScroll={3}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
