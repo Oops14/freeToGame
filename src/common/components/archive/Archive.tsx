@@ -6,22 +6,31 @@ import grid_4 from '../../../assets/grid-16-svgrepo-com444.svg'
 import style from './archive.module.scss'
 import { GameGridItem } from '../../../features/games/ui/game-grid/GameGridItem'
 import { AppRootStateType, useAppDispatch } from '../../../app/store'
-import { GameInitialStateType } from '../../types/types'
+import { GameInitialStateType, GameType } from '../../types/types'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { setGamesTC } from '../../../features/games/model/gamesReducer.ts'
+import { getCategoryGamesTC, setGamesTC } from '../../../features/games/model/gamesReducer.ts'
 import { scrollToTop } from '../../utils/scrollToTop'
 import { useNavigation } from '../../hooks/useNavigation.ts'
 import { GridViewItem } from './archive-grid-view/GridViewItem.tsx'
 import { Pagination } from '../pagination/Pagination.tsx'
+import { useLocation } from 'react-router-dom'
+import { PageTitle } from '../page-title/PageTitle.tsx'
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search)
+}
 
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const dispatch = useAppDispatch()
     const [currentGrid, setCurrentGrid] = useState(() => {
-        const grid = localStorage.getItem('grid_view');
+        const grid = localStorage.getItem('grid_view')
         return grid ? JSON.parse(grid) : 'col-lg-4'
     })
+
+    const query = useQuery()
+    const currentCategory = query.get('category')
 
     const {
         changePage,
@@ -34,7 +43,7 @@ export const Archive = () => {
         gamesPerPageOptions,
     } = useNavigation()
 
-    const currentGames = games.games.slice(indexOfFirstGame, indexOfLastGame)
+    const [archiveGames, setArchiveGames] = useState<GameType[]>([])
 
     const changeGridView = (view: string) => {
         setCurrentGrid(view)
@@ -45,6 +54,20 @@ export const Archive = () => {
         scrollToTop()
     }, [])
 
+    // Fetch category-specific games when category changes
+    useEffect(() => {
+        if (currentCategory) dispatch(getCategoryGamesTC(currentCategory))
+    }, [dispatch, currentCategory])
+
+    // Update archiveGames state when relevant data changes
+    useEffect(() => {
+        if (currentCategory) {
+            setArchiveGames(games.gamesByCategory.slice(indexOfFirstGame, indexOfLastGame))
+        } else {
+            setArchiveGames(games.games.slice(indexOfFirstGame, indexOfLastGame))
+        }
+    }, [currentCategory, games.games, games.gamesByCategory, indexOfFirstGame, indexOfLastGame])
+
     // Save gamesPerPage to localStorage whenever it changes
     useEffect(() => {
         if (!perPageQuery) {
@@ -52,14 +75,14 @@ export const Archive = () => {
         }
 
         localStorage.setItem('gamesPerPage', gamesPerPage.toString())
-        localStorage.setItem('grid_view', JSON.stringify(currentGrid));
-
+        localStorage.setItem('grid_view', JSON.stringify(currentGrid))
     }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery, currentGrid])
 
     return (
         <>
             <Header />
-            <Categories />
+            { currentCategory ? <PageTitle title={currentCategory}/> : <Categories /> }
+            {/* <Categories /> */}
             <div className="product_archive">
                 <div className="container">
                     <div className={style.page_tools}>
@@ -79,46 +102,64 @@ export const Archive = () => {
                                 })}
                             </div>
                             <div className={style.grid_view}>
-                                <GridViewItem changeGridView={changeGridView} class={style.view_grid_item} img={line_grid} gridType={'col-lg-12'} currentGrid={currentGrid}/>
-                                <GridViewItem changeGridView={changeGridView} class={style.view_grid_item} classImg={style.grid_of_3} img={grid_3} gridType={'col-lg-4'} currentGrid={currentGrid} />
-                                <GridViewItem changeGridView={changeGridView} class={style.view_grid_item} classImg={style.grid_of_4} img={grid_4} gridType={'col-lg-3'} currentGrid={currentGrid} />
+                                <GridViewItem
+                                    changeGridView={changeGridView}
+                                    class={style.view_grid_item}
+                                    img={line_grid}
+                                    gridType={'col-lg-12'}
+                                    currentGrid={currentGrid}
+                                />
+                                <GridViewItem
+                                    changeGridView={changeGridView}
+                                    class={style.view_grid_item}
+                                    classImg={style.grid_of_3}
+                                    img={grid_3}
+                                    gridType={'col-lg-4'}
+                                    currentGrid={currentGrid}
+                                />
+                                <GridViewItem
+                                    changeGridView={changeGridView}
+                                    class={style.view_grid_item}
+                                    classImg={style.grid_of_4}
+                                    img={grid_4}
+                                    gridType={'col-lg-3'}
+                                    currentGrid={currentGrid}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="products">
                         <div className="row">
-                            {currentGrid === 'col-lg-12' ? (
-                                    currentGames.map((game) => {
-                                        return (
-                                            <div key={game.id} className={currentGrid}>
-                                                <GameGridItem
-                                                    id={game.id}
-                                                    title={game.title}
-                                                    img={game.thumbnail}
-                                                    dev={game.publisher}
-                                                    showButton={false}
-                                                    categ={game.genre}
-                                                    alternativeDesign={true}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                ) : (
-                                    currentGames.map((game) => {
-                                        return (
-                                            <div key={game.id} className={currentGrid}>
-                                                <GameGridItem
-                                                    id={game.id}
-                                                    title={game.title}
-                                                    img={game.thumbnail}
-                                                    dev={game.publisher}
-                                                    showButton={false}
-                                                    categ={game.genre}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                )}
+                            {currentGrid === 'col-lg-12'
+                                ? archiveGames.map((game) => {
+                                      return (
+                                          <div key={game.id} className={currentGrid}>
+                                              <GameGridItem
+                                                  id={game.id}
+                                                  title={game.title}
+                                                  img={game.thumbnail}
+                                                  dev={game.publisher}
+                                                  showButton={false}
+                                                  categ={game.genre}
+                                                  alternativeDesign={true}
+                                              />
+                                          </div>
+                                      )
+                                  })
+                                : archiveGames.map((game) => {
+                                      return (
+                                          <div key={game.id} className={currentGrid}>
+                                              <GameGridItem
+                                                  id={game.id}
+                                                  title={game.title}
+                                                  img={game.thumbnail}
+                                                  dev={game.publisher}
+                                                  showButton={false}
+                                                  categ={game.genre}
+                                              />
+                                          </div>
+                                      )
+                                  })}
                         </div>
                     </div>
                     <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
