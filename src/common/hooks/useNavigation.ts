@@ -23,17 +23,20 @@ export const useNavigation = () => {
     const indexOfLastGame = currentPage * gamesPerPage
     const indexOfFirstGame = indexOfLastGame - gamesPerPage
 
+    const currentCategory = query.get('category')
+
+
     // Pagination.
     const changePage = (pageNumber: number) => {
         setCurrentPage(pageNumber)
-        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`)
+        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}&category=${currentCategory}`)
 
         scrollToTop()
     }
 
     const changeGamesPerPage = (number: number) => {
         setGamesPerPage(number)
-        navigate(`?page=${currentPage}&per_page=${number}`)
+        navigate(`?page=${currentPage}&per_page=${number}&category=${currentCategory}`)
     }
 
     return {

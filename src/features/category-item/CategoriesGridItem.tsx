@@ -11,7 +11,7 @@ export const CategoriesGridItem = ({ title }: Props) => {
     const categ = title.toLowerCase()
 
     const handleCategoryGames = () => {
-        navigate(`/freeToGame/games/?category=${categ}`)
+        navigate(`?category=${categ}`)
     }
 
     return (

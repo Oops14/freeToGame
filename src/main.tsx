@@ -20,10 +20,7 @@ const router = createBrowserRouter([
         path: '/freeToGame/games/',
         element: <Archive />,
     },
-    {
-        path: '/freeToGame/games/:categ',
-        element: <Archive />,
-    },
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
