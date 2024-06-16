@@ -15,11 +15,14 @@ import { useNavigation } from '../../hooks/useNavigation.ts'
 import { GridViewItem } from './archive-grid-view/GridViewItem.tsx'
 import { Pagination } from '../pagination/Pagination.tsx'
 import { PageTitle } from '../page-title/PageTitle.tsx'
-
+import { RequestStatusType } from '../../../app/appReducer.ts'
+import CircularIndeterminate from '../progress-bar/CircularIndeterminate.tsx'
 
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
     const dispatch = useAppDispatch()
+    const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+
     const [currentGrid, setCurrentGrid] = useState(() => {
         const grid = localStorage.getItem('grid_view')
         return grid ? JSON.parse(grid) : 'col-lg-4'
@@ -34,7 +37,7 @@ export const Archive = () => {
         perPageQuery,
         setGamesPerPage,
         gamesPerPageOptions,
-        currentCategory
+        currentCategory,
     } = useNavigation()
 
     const [archiveGames, setArchiveGames] = useState<GameType[]>([])
@@ -125,7 +128,9 @@ export const Archive = () => {
                     </div>
                     <div className="products">
                         <div className="row">
-                            {currentGrid === 'col-lg-12'
+                            {loader === 'loading' && <CircularIndeterminate />}
+
+                            {currentGrid === 'col-lg-12' && loader === 'succeeded'
                                 ? archiveGames.map((game) => {
                                       return (
                                           <div key={game.id} className={currentGrid}>
