@@ -14,12 +14,8 @@ import { scrollToTop } from '../../utils/scrollToTop'
 import { useNavigation } from '../../hooks/useNavigation.ts'
 import { GridViewItem } from './archive-grid-view/GridViewItem.tsx'
 import { Pagination } from '../pagination/Pagination.tsx'
-import { useLocation } from 'react-router-dom'
 import { PageTitle } from '../page-title/PageTitle.tsx'
 
-const useQuery = () => {
-    return new URLSearchParams(useLocation().search)
-}
 
 export const Archive = () => {
     const games = useSelector<AppRootStateType, GameInitialStateType>((state) => state.games)
@@ -28,9 +24,6 @@ export const Archive = () => {
         const grid = localStorage.getItem('grid_view')
         return grid ? JSON.parse(grid) : 'col-lg-4'
     })
-
-    const query = useQuery()
-    const currentCategory = query.get('category')
 
     const {
         changePage,
@@ -41,6 +34,7 @@ export const Archive = () => {
         perPageQuery,
         setGamesPerPage,
         gamesPerPageOptions,
+        currentCategory
     } = useNavigation()
 
     const [archiveGames, setArchiveGames] = useState<GameType[]>([])
@@ -49,6 +43,7 @@ export const Archive = () => {
         setCurrentGrid(view)
     }
 
+    // Fetch all games.
     useEffect(() => {
         dispatch(setGamesTC())
         scrollToTop()
@@ -81,7 +76,7 @@ export const Archive = () => {
     return (
         <>
             <Header />
-            { currentCategory ? <PageTitle title={currentCategory}/> : <Categories /> }
+            {currentCategory ? <PageTitle title={currentCategory} /> : <Categories />}
             {/* <Categories /> */}
             <div className="product_archive">
                 <div className="container">
@@ -162,6 +157,9 @@ export const Archive = () => {
                                   })}
                         </div>
                     </div>
+                    {/* 
+                        FIXME: Fix the issue with the worng canculation on categories pages.
+                    */}
                     <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
                 </div>
             </div>

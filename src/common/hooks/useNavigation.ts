@@ -14,29 +14,38 @@ export const useNavigation = () => {
     // Navigation.
     const location = useLocation()
     const navigate = useNavigate()
+
     const query = new URLSearchParams(location.search)
     const pageQuery = query.get('page')
     const perPageQuery = query.get('per_page')
+    const currentCategory = query.get('category')
 
     const [currentPage, setCurrentPage] = useState(pageQuery ? parseInt(pageQuery) : 1)
 
     const indexOfLastGame = currentPage * gamesPerPage
     const indexOfFirstGame = indexOfLastGame - gamesPerPage
 
-    const currentCategory = query.get('category')
-
-
     // Pagination.
     const changePage = (pageNumber: number) => {
         setCurrentPage(pageNumber)
-        navigate(`?page=${pageNumber}&per_page=${gamesPerPage}&category=${currentCategory}`)
+
+        if (currentCategory) {
+            navigate(`?page=${pageNumber}&per_page=${gamesPerPage}&category=${currentCategory}`)
+        } else {
+            navigate(`?page=${pageNumber}&per_page=${gamesPerPage}`)
+        }
 
         scrollToTop()
     }
 
     const changeGamesPerPage = (number: number) => {
         setGamesPerPage(number)
-        navigate(`?page=${currentPage}&per_page=${number}&category=${currentCategory}`)
+        
+        if (currentCategory) {
+            navigate(`?page=${currentPage}&per_page=${number}&category=${currentCategory}`)
+        } else {
+            navigate(`?page=${currentPage}&per_page=${number}`)
+        }
     }
 
     return {
@@ -48,5 +57,6 @@ export const useNavigation = () => {
         perPageQuery,
         setGamesPerPage,
         gamesPerPageOptions,
+        currentCategory
     }
 }
