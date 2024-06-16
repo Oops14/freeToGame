@@ -79,12 +79,13 @@ export const Archive = () => {
     return (
         <>
             <Header />
-            {currentCategory ? <PageTitle title={currentCategory} /> : <Categories />}
-            {/* <Categories /> */}
+            {/* {currentCategory ? <PageTitle title={currentCategory} /> : <Categories />} */}
+            {currentCategory ? <Categories /> : <Categories />}
+
             <div className="product_archive">
                 <div className="container">
                     <div className={style.page_tools}>
-                        <h3>All Games</h3>
+                        <h3>{currentCategory ? `${currentCategory.toUpperCase()}` : 'All Games'}</h3>
                         <div className={style.tools_inner}>
                             <div className={style.grid_view}>
                                 <span>Show: </span>
@@ -162,10 +163,15 @@ export const Archive = () => {
                                   })}
                         </div>
                     </div>
-                    {/* 
-                        FIXME: Fix the issue with the worng canculation on categories pages.
-                    */}
-                    <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
+                    {/*
+                     *   TODO: Add styles from the active page number.
+                     *
+                     *   FIXME: Fix the issue with the worng canculation on categories pages.
+                     */}
+
+                    {archiveGames && (
+                        <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
+                    )}
                 </div>
             </div>
         </>
