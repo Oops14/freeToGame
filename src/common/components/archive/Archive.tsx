@@ -14,7 +14,6 @@ import { scrollToTop } from '../../utils/scrollToTop'
 import { useNavigation } from '../../hooks/useNavigation.ts'
 import { GridViewItem } from './archive-grid-view/GridViewItem.tsx'
 import { Pagination } from '../pagination/Pagination.tsx'
-import { PageTitle } from '../page-title/PageTitle.tsx'
 import { RequestStatusType } from '../../../app/appReducer.ts'
 import CircularIndeterminate from '../progress-bar/CircularIndeterminate.tsx'
 
@@ -80,7 +79,8 @@ export const Archive = () => {
         <>
             <Header />
             {/* {currentCategory ? <PageTitle title={currentCategory} /> : <Categories />} */}
-            {currentCategory ? <Categories /> : <Categories />}
+
+            <Categories />
 
             <div className="product_archive">
                 <div className="container">
@@ -163,13 +163,12 @@ export const Archive = () => {
                                   })}
                         </div>
                     </div>
-                    {/*
-                     *   TODO: Add styles from the active page number.
-                     *
-                     *   FIXME: Fix the issue with the worng canculation on categories pages.
-                     */}
 
-                    {archiveGames && (
+                    {/*
+                     //   TODO: Add styles from the active page number.
+                     //   FIXME: Fix the issue with the worng canculation on categories pages.
+                     */}
+                    {archiveGames.length && (
                         <Pagination className={style.pagination} gamesPerPage={gamesPerPage} changePage={changePage} />
                     )}
                 </div>
