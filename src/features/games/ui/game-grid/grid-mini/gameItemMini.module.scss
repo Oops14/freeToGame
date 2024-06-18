@@ -1,41 +1,44 @@
 .game_item_mini {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .game_details {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .item_mini_title {
-    font-size: 16px;
-    margin-bottom: 0;
+  font-size: 16px;
+  margin-bottom: 0;
 
-    a {
-        color: #333;
-    }
+  a {
+    color: #333;
+  }
 }
 
 .developer {
-    color: rgb(109, 78, 236);
-    font-weight: 600;
+  color: rgb(109, 78, 236);
+  font-weight: 600;
 }
 
 .image {
-    position: relative;
+  position: relative;
 
-    a {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-    }
+  min-width: 100px;
+  min-height: 100px;
 
-    img {
-        max-width: 155px;
-        height: 100%;
-    }
+  a {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  img {
+    max-width: 155px;
+    height: 100%;
+  }
 }

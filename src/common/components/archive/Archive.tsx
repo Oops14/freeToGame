@@ -73,7 +73,7 @@ export const Archive = () => {
 
         localStorage.setItem('gamesPerPage', gamesPerPage.toString())
         localStorage.setItem('grid_view', JSON.stringify(currentGrid))
-    }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery, currentGrid])
+    }, [gamesPerPage, dispatch, gamesPerPageOptions, perPageQuery, currentGrid, setGamesPerPage])
 
     return (
         <>

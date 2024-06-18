@@ -27,6 +27,9 @@
   cursor: pointer;
   border-radius: 5px;
 
+  min-width: 100px;
+  min-height: 150px;
+
   img {
     transition: all .4s linear;
   }
