@@ -6,6 +6,7 @@ import App from './app/App'
 import { store } from './app/store'
 import { ProductSinglePage } from './common/components/product-page/ProductSinglePage'
 import { Archive } from './common/components/archive/Archive'
+import { Login } from './features/auth/ui/Login'
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: '/freeToGame/games/',
         element: <Archive />,
+    },
+    {
+        path: '/freeToGame/login/',
+        element: <Login />,
     },
 
 ])

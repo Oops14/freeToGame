@@ -1,0 +1,36 @@
+.login_page {
+    height: 100vh;
+    background-color: #7153ed;
+    margin-top: -40px;
+
+    display: flex;
+
+    .login_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.login_form {
+    padding: 50px;
+    width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+
+
+    form {
+        input {
+            margin-bottom: 20px;
+        }
+
+        .buttons_block {
+            display: flex;
+            gap: 15px;
+
+            button {
+                border-radius: 5px;
+            }
+        }
+    }
+}

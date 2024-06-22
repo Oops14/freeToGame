@@ -123,6 +123,22 @@
     }
 }
 
+.login {
+    margin-right: 20px;
+
+    a {
+        padding: 7px 15px;
+        background-color: #7153ed;
+        color: #fff;
+
+        border-radius: 5px;
+
+        &:hover {
+            background-color: #7c63de;
+        }
+    }
+}
+
 // ====================================
 // MOBILE HEADER
 // ====================================
