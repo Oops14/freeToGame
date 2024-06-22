@@ -35,6 +35,9 @@ export const ProductSinglePage = () => {
         if (id) dispatch(getGameByIdTC(Number(id)))
         if (categ) dispatch(getCategoryGamesTC(categ))
 
+        /**
+         * TODO: Use the native func. from react router to "scroll to top".
+         */
         scrollToTop()
     }, [location.key])
 

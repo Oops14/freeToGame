@@ -1,7 +1,20 @@
 import style from './footer.module.scss'
 import logo from '../../../assets/logo/1.svg'
+import { useState } from 'react'
 
 export const Footer = () => {
+    const [selectedOption, setSelectedOption] = useState('1')
+
+    /**
+     *
+     * Handle option for the language switcher.
+     *
+     * @param event
+     */
+    const handleChange = (event: any) => {
+        setSelectedOption(event.target.value)
+    }
+
     return (
         <section className={style.footer_general}>
             <div className="container">
@@ -11,12 +24,10 @@ export const Footer = () => {
                             <img src={logo} alt={'#'} />
                         </div>
                         <div className={style.language_switch}>
-                            <select name="select" className={style.select_curr}>
-                                <option selected value="value1">
-                                    United States (English) / USD
-                                </option>
-                                <option value="value2">Europian Union / EUR</option>
-                                <option value="value3">Canada / CAD</option>
+                            <select name="select" className={style.select_curr} onChange={handleChange}>
+                                <option value="1">United States (English) / USD</option>
+                                <option value="2">Europian Union / EUR</option>
+                                <option value="3">Canada / CAD</option>
                             </select>
                         </div>
                     </div>

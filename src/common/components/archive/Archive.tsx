@@ -48,6 +48,10 @@ export const Archive = () => {
     // Fetch all games.
     useEffect(() => {
         dispatch(setGamesTC())
+
+        /**
+         * TODO: Use the native func. from react router to "scroll to top".
+         */
         scrollToTop()
     }, [])
 
