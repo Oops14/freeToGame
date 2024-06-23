@@ -5,8 +5,13 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
+import { AppRootStateType } from '../../../app/store'
+import { useSelector } from 'react-redux'
 
 export const Header = () => {
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+
+    
     return (
         <>
             <section className={style.main_header}>
@@ -22,7 +27,7 @@ export const Header = () => {
                     </div>
                     <div className={style.header_col_right}>
                         <div className={style.login}>
-                            <Link to={'/freeToGame/login/'}>Login</Link>
+                            <Link to={'/freeToGame/login/'}>{isLoggedIn ? 'Logout' : 'Login'}</Link>
                         </div>
                         <div className={style.social_icons}>
                             <div className={style.icon_item}>

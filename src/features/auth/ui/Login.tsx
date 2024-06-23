@@ -2,8 +2,17 @@ import { useFormik } from 'formik'
 import { Footer } from '../../../common/components/footer/Footer'
 import { Header } from '../../../common/components/header/Header'
 import style from './login.module.scss'
+import { AppRootStateType, useAppDispatch } from '../../../app/store'
+import { isInitialized, logIn } from '../model/authReducer'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch()
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -26,15 +35,26 @@ export const Login = () => {
 
             return errors
         },
-        onSubmit: (values, formikHelpers) => {
+        onSubmit: async (values, formikHelpers) => {
             console.log(`Email: ${values.email}`)
             console.log(`Password: ${values.password}`)
 
-
-            formikHelpers.setSubmitting(false)
-            formik.resetForm()
+            try {
+                const data = { email: values.email, password: values.password }
+                await dispatch(logIn(data))
+            } finally {
+                formikHelpers.setSubmitting(false)
+            }
         },
     })
+
+    useEffect(() => {
+        dispatch(isInitialized())
+    }, [])
+
+    if (isLoggedIn) {
+        navigate('/freeToGame/')
+    }
 
     return (
         <>

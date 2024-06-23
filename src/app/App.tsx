@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import { Header } from '../common/components/header/Header'
 import { Articles } from '../common/components/articles/Articles'
@@ -8,6 +8,7 @@ import { Intro } from '../common/components/intro/Intro'
 import { ProductTabs } from '../common/components/tabs/product-tabs/ProductTabs'
 import { setGamesTC } from '../features/games/model/gamesReducer.ts'
 import { useAppDispatch } from './store'
+import { isInitialized } from '../features/auth/model/authReducer.ts'
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
 
     React.useEffect(() => {
         dispatch(setGamesTC())
+    }, [])
+
+    useEffect(() => {
+        dispatch(isInitialized())
     }, [])
 
     return (
