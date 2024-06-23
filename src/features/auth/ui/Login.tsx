@@ -3,7 +3,7 @@ import { Footer } from '../../../common/components/footer/Footer'
 import { Header } from '../../../common/components/header/Header'
 import style from './login.module.scss'
 import { AppRootStateType, useAppDispatch } from '../../../app/store'
-import { isInitialized, logIn } from '../model/authReducer'
+import {  isInitializedTC, logIn } from '../model/authReducer'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -47,7 +47,7 @@ export const Login = () => {
     })
 
     useEffect(() => {
-        dispatch(isInitialized())
+        dispatch(isInitializedTC())
     }, [])
 
     if (isLoggedIn) {

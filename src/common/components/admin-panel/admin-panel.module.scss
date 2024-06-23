@@ -1,0 +1,45 @@
+.admin_panel {
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    background-color: #333;
+
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.admin_panel_menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    li {
+        position: relative;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        a {
+            padding-top: 3px;
+            color: #fff;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 4px;
+                height: 2px;
+                background-color: #fff;
+                width: 0;
+
+                transition: all 0.3s linear;
+            }
+
+            &:hover {
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

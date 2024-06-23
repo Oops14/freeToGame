@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppRootStateType, useAppDispatch } from '../../../app/store'
 import { useSelector } from 'react-redux'
 import { logOut } from '../../../features/auth/model/authReducer'
+import { AdminPanel } from '../admin-panel/AdminPanel'
 
 export const Header = () => {
     const dispatch = useAppDispatch()
@@ -15,15 +16,16 @@ export const Header = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
 
     const logoutHandler = () => {
-        
         if (isLoggedIn) {
             dispatch(logOut())
             navigate('/freeToGame/login/')
         }
     }
-    
+
     return (
         <>
+            {isLoggedIn && <AdminPanel />}
+            
             <section className={style.main_header}>
                 <div className={'container ' + style.container}>
                     <div className={style.header_col_left}>
@@ -37,7 +39,9 @@ export const Header = () => {
                     </div>
                     <div className={style.header_col_right}>
                         <div className={style.login}>
-                            <Link onClick={logoutHandler} to={'/freeToGame/login/'}>{isLoggedIn ? 'Logout' : 'Login'}</Link>
+                            <Link onClick={logoutHandler} to={'/freeToGame/login/'}>
+                                {isLoggedIn ? 'Logout' : 'Login'}
+                            </Link>
                         </div>
                         <div className={style.social_icons}>
                             <div className={style.icon_item}>
