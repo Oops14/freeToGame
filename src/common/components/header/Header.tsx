@@ -4,13 +4,23 @@ import SearchIcon from '@mui/icons-material/Search'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Link } from 'react-router-dom'
-import { AppRootStateType } from '../../../app/store'
+import { Link, useNavigate } from 'react-router-dom'
+import { AppRootStateType, useAppDispatch } from '../../../app/store'
 import { useSelector } from 'react-redux'
+import { logOut } from '../../../features/auth/model/authReducer'
 
 export const Header = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
 
+    const logoutHandler = () => {
+        
+        if (isLoggedIn) {
+            dispatch(logOut())
+            navigate('/freeToGame/login/')
+        }
+    }
     
     return (
         <>
@@ -27,7 +37,7 @@ export const Header = () => {
                     </div>
                     <div className={style.header_col_right}>
                         <div className={style.login}>
-                            <Link to={'/freeToGame/login/'}>{isLoggedIn ? 'Logout' : 'Login'}</Link>
+                            <Link onClick={logoutHandler} to={'/freeToGame/login/'}>{isLoggedIn ? 'Logout' : 'Login'}</Link>
                         </div>
                         <div className={style.social_icons}>
                             <div className={style.icon_item}>

@@ -36,8 +36,6 @@ export const Login = () => {
             return errors
         },
         onSubmit: async (values, formikHelpers) => {
-            console.log(`Email: ${values.email}`)
-            console.log(`Password: ${values.password}`)
 
             try {
                 const data = { email: values.email, password: values.password }
