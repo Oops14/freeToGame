@@ -33,7 +33,7 @@ export const ProductSinglePage = () => {
 
     useEffect(() => {
         if (id) dispatch(getGameByIdTC(Number(id)))
-        if (categ) dispatch(getCategoryGamesTC(categ))
+        if (categ) dispatch(getCategoryGamesTC(categ.split(' ').join('')))
 
         /**
          * TODO: Use the native func. from react router to "scroll to top".

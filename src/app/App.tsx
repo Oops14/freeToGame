@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import { Header } from '../common/components/header/Header'
 import { Articles } from '../common/components/articles/Articles'
@@ -17,21 +17,21 @@ function App() {
     const dispatch = useAppDispatch()
     const isInitializedUser = useSelector<AppRootStateType, boolean>(state => state.auth.isInitializedUser)
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(setGamesTC())
     }, [])
 
-    useEffect(() => {
-        dispatch(isInitializedTC())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(isInitializedTC())
+    // }, [])
 
-    if (!isInitializedUser) {
-        return (
-            <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
-                <CircularProgress />
-            </div>
-        )
-    }
+    // if (!isInitializedUser) {
+    //     return (
+    //         <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
+    //             <CircularProgress />
+    //         </div>
+    //     )
+    // }
 
     return (
         <>

@@ -126,10 +126,11 @@
 .login {
     margin-right: 20px;
 
-    a {
+    button {
         padding: 7px 15px;
         background-color: #7153ed;
         color: #fff;
+        transition: all .2s linear;
 
         border-radius: 5px;
 

@@ -1,17 +1,24 @@
+import CircularProgress from '@mui/material/CircularProgress'
 import { useFormik } from 'formik'
-import { Footer } from '../../../common/components/footer/Footer'
-import { Header } from '../../../common/components/header/Header'
-import style from './login.module.scss'
-import { AppRootStateType, useAppDispatch } from '../../../app/store'
-import {  isInitializedTC, logIn } from '../model/authReducer'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { AppRootStateType, useAppDispatch } from '../../../app/store'
+import { Footer } from '../../../common/components/footer/Footer'
+import { Header } from '../../../common/components/header/Header'
+import { logIn } from '../model/authReducer'
+import style from './login.module.scss'
 
 export const Login = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const isInitializedUser = useSelector<AppRootStateType, boolean>((state) => state.app.isInitializedUser)
+
+    type FormicErrors = {
+        email: string
+        password: string
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -19,7 +26,8 @@ export const Login = () => {
             password: '',
         },
         validate: (values) => {
-            const errors = {}
+            // @ts-ignore
+            const errors: FormicErrors = {}
 
             if (!values.email) {
                 errors.email = 'Required'
@@ -36,22 +44,32 @@ export const Login = () => {
             return errors
         },
         onSubmit: async (values, formikHelpers) => {
-
             try {
-                const data = { email: values.email, password: values.password }
-                await dispatch(logIn(data))
-            } finally {
+                await dispatch(logIn({ email: values.email, password: values.password }))
+                formikHelpers.setSubmitting(false)
+            } catch (error) {
+                console.error('Failed to log in:', error)
                 formikHelpers.setSubmitting(false)
             }
         },
     })
 
-    useEffect(() => {
-        dispatch(isInitializedTC())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(isInitializedTC())
+    // }, [])
 
-    if (isLoggedIn) {
-        navigate('/freeToGame/')
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/freeToGame/')
+        }
+    }, [isLoggedIn, navigate])
+
+    if (isInitializedUser) {
+        return (
+            <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
+                <CircularProgress />
+            </div>
+        )
     }
 
     return (
@@ -92,9 +110,6 @@ export const Login = () => {
                             <div className={style.buttons_block}>
                                 <button type="submit" className="btn" disabled={formik.isSubmitting}>
                                     Sign In
-                                </button>
-                                <button type="button" className="btn">
-                                    Sign Up
                                 </button>
                             </div>
                         </form>

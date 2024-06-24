@@ -3,7 +3,7 @@ import logo from '../../../assets/logo/1.svg'
 import { useState } from 'react'
 
 export const Footer = () => {
-    const [selectedOption, setSelectedOption] = useState('1')
+    const [, setSelectedOption] = useState('1')
 
     /**
      *
