@@ -20,10 +20,10 @@ export const Header = () => {
         dispatch(setLoaderAC('loading'))
 
         dispatch(logOut())
-            .then((res) => {
+            .then(() => {
                 dispatch(setLoaderAC('succeeded'))
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch(setLoaderAC('failed'))
             })
 
