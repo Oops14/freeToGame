@@ -31,6 +31,14 @@ const router = createBrowserRouter([
         path: '/freeToGame/dashboard/',
         element: <Dashboard />,
     },
+    {
+        path: '/freeToGame/dashboard/posts',
+        element: <Dashboard />,
+    },
+    {
+        path: '/freeToGame/dashboard/reviews',
+        element: <Dashboard />,
+    },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
