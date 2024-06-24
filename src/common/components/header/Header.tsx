@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { setLoaderAC } from '../../../app/appReducer'
 import { AppRootStateType, useAppDispatch } from '../../../app/store'
 import logo from '../../../assets/logo/1.svg'
 import { logOut } from '../../../features/auth/model/authReducer'
@@ -16,8 +17,16 @@ export const Header = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
 
     const logoutHandler = () => {
+        dispatch(setLoaderAC('loading'))
+
         dispatch(logOut())
-        // dispatch(isInitializedUserAC(false))
+            .then((res) => {
+                dispatch(setLoaderAC('succeeded'))
+            })
+            .catch((err) => {
+                dispatch(setLoaderAC('failed'))
+            })
+
         navigate('/freeToGame/login/')
     }
 
