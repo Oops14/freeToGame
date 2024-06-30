@@ -39,21 +39,14 @@ export const Dashboard = () => {
         let activeDashboardLink = dashboardMenu[0].title
 
         dashboardMenu.forEach((el) => {
-            console.log(el.link)
-
-            if (el.link === location.pathname) {
-                console.log(true)
-                activeDashboardLink = el.title
-            }
+            if (el.link === location.pathname) activeDashboardLink = el.title
         })
 
         setActiveLink(activeDashboardLink)
     }, [location.pathname, dashboardMenu])
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/freeToGame/')
-        }
+        if (!isLoggedIn) navigate('/freeToGame/')
     }, [isLoggedIn, navigate])
 
     return (

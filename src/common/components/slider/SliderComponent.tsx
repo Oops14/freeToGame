@@ -1,12 +1,12 @@
-import { CategoriesGridItem } from '../../../features/category-item/CategoriesGridItem.tsx'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import './slider.scss'
 import Slider from 'react-slick'
-import { ArticlesItems, Categories, GameType } from '../../types/types.ts'
-import ArticleItem from '../../../features/article/ui/ArticleItem.tsx'
-import style from './sliderComponent.module.scss'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
+import { CategoriesGridItem } from '../../../features/category-item/CategoriesGridItem.tsx'
 import { GameGridItem } from '../../../features/games/ui/game-grid/GameGridItem.tsx'
+import ArticleItem from '../../../features/posts/ui/ArticleItem.tsx'
+import { ArticlesItems, Categories, GameType } from '../../types/types.ts'
+import './slider.scss'
+import style from './sliderComponent.module.scss'
 
 type Props = {
     elements: Categories[] | ArticlesItems[] | GameType[]
