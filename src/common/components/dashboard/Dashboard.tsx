@@ -4,13 +4,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppRootStateType } from '../../../app/store'
 import { AdminPanel } from '../admin-panel/AdminPanel'
 import style from './dashboard.module.scss'
+import DashboardMain from './pages/main/DashboardMain'
+import DashboardPosts from './pages/posts/DashboardPosts'
+import DashboardReviews from './pages/reviews/DashboardReviews'
 
 export const Dashboard = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
 
-    // Use useMemo to memoize the dashboardMenu array
     const dashboardMenu = useMemo(
         () => [
             {
@@ -35,6 +37,9 @@ export const Dashboard = () => {
         setActiveLink(title)
     }
 
+    // This useEffect hook updates the active dashboard link based on the current pathname.
+    // It iterates through the dashboardMenu to find a match with the current location's pathname.
+    // If a match is found, it sets the active dashboard link to the title of the matched menu item.
     useEffect(() => {
         let activeDashboardLink = dashboardMenu[0].title
 
@@ -52,6 +57,7 @@ export const Dashboard = () => {
     return (
         <>
             <AdminPanel />
+
             <div className={style.dashboard_area}>
                 <div className="row">
                     <div className="col-lg-2">
@@ -71,7 +77,11 @@ export const Dashboard = () => {
                         </div>
                     </div>
                     <div className="col-lg-10">
-                        <div className={style.content_area}></div>
+                        <div className={style.content_area}>
+                            {activelink === 'Dashboard' && <DashboardMain />}
+                            {activelink === 'Posts' && <DashboardPosts />}
+                            {activelink === 'Reviews' && <DashboardReviews />}
+                        </div>
                     </div>
                 </div>
             </div>
