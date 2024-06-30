@@ -10,7 +10,10 @@ export const AdminPanel = () => {
                     <Link to="/freeToGame/dashboard/">Dashboard</Link>
                 </li>
                 <li>
-                    <Link to="/freeToGame/">Add Post</Link>
+                    <Link to="/freeToGame/dashboard/posts">Add Post</Link>
+                </li>
+                <li>
+                    <Link to="/freeToGame/">View Site</Link>
                 </li>
             </ul>
         </div>
