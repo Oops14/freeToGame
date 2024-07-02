@@ -18,7 +18,6 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // Type for Dispatch.
 type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AnyAction>
-
 // Typed dispatch.
 export const useAppDispatch = useDispatch<AppDispatchType>
 

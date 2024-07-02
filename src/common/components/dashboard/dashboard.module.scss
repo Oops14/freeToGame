@@ -102,6 +102,7 @@
 .post_block_title {
     display: flex;
     align-items: center;
+    width: 300px;
 
     > input {
         cursor: pointer;
@@ -116,4 +117,12 @@
 .add_new {
     display: flex;
     gap: 20px;
+}
+
+.categories {
+    width: 150px;
+}
+
+.date {
+    width: 125px;
 }
