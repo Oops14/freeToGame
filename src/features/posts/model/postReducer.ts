@@ -29,7 +29,7 @@ const initialPostState = {
 export const postReducer = (state = initialPostState, action: PostActions) => {
     switch (action.type) {
         case ADD_POST: {
-            return state
+            return {...state, posts: [...state.posts, action.post]}
         }
         default: {
             return state
@@ -42,6 +42,7 @@ export type Post = {
     category: string
     date: string
     content: string
+    img: string
 }
 
 type initialPostState = {
