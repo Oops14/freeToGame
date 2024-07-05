@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { AppRootStateType } from '../../../../../app/store'
 import { Post as PostType } from '../../../../../features/posts/model/postReducer.ts'
 import Post from '../../../../../features/posts/ui/dashboard/Post'
-import FullScreenDialog from '../../../popup/FullScreenPopup.tsx'
+import FullScreenDialog from '../../../popup/FullScreenDialog.tsx'
 import style from '../../dashboard.module.scss'
 const DashboardPosts = () => {
     const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts.posts)

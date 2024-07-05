@@ -37,8 +37,8 @@ export const Login = () => {
 
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (values.password.length <= 6) {
-                errors.password = 'The minimum length of the password is 6'
+            } else if (values.password.length <= 3) {
+                errors.password = 'The minimum length of the password is 3'
             }
 
             return errors
@@ -79,6 +79,10 @@ export const Login = () => {
                 <div className={'container ' + style.login_container}>
                     <div className={style.login_form}>
                         <h4>Sign In</h4>
+                        <p style={{marginBottom: '0'}}>Test account credentials:</p>
+                        <p style={{marginBottom: '0'}}>Email: free@samuraijs.com</p>
+                        <p>Password: free</p>
+
 
                         <form onSubmit={formik.handleSubmit}>
                             <div>
@@ -117,7 +121,7 @@ export const Login = () => {
                 </div>
             </div>
 
-            <Footer />
+            <Footer/>
         </>
     )
 }
