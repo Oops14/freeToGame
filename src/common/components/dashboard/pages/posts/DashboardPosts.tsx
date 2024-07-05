@@ -27,7 +27,7 @@ const DashboardPosts = () => {
             </div>
             <div className={style.current_content_area}>
                 {posts.map((post) => {
-                    return <Post title={post.title} category={post.category} date={post.date} />
+                    return <Post key={post.id} title={post.title} category={post.category} date={post.date} />
                 })}
             </div>
         </>

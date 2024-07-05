@@ -10,6 +10,10 @@ import { TransitionProps } from '@mui/material/transitions'
 import * as React from 'react'
 import style from './popup.module.scss'
 import {useRef, useState} from "react";
+import {useAppDispatch} from "../../../app/store.ts";
+import {addPostAC} from "../../../features/posts/model/postReducer.ts";
+import {v4 as uuidv4} from 'uuid';
+
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -25,6 +29,8 @@ type Props = {
 }
 
 export default function FullScreenDialog({ text }: Props) {
+    const dispatch = useAppDispatch()
+
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -39,11 +45,24 @@ export default function FullScreenDialog({ text }: Props) {
         setSelectedFile(file);
     };
 
+    const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const text = e.currentTarget.value
+        setTitle(text)
+    }
+
+    const handleContent = (e:  React.ChangeEvent<HTMLTextAreaElement>) => {
+        const content = e.currentTarget.value
+        setContent(content)
+    }
+
+    const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const category = e.currentTarget.value
+        setCategory(category)
+    }
+
     const removeFile = () => {
         setSelectedFile(null);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = "";
-        }
+        if (fileInputRef.current) fileInputRef.current.value = "";
     }
 
     const handleClickOpen = () => {
@@ -51,7 +70,22 @@ export default function FullScreenDialog({ text }: Props) {
     }
 
     const handleClose = () => {
+        const post = {
+            id: uuidv4(),
+            title: title,
+            category: category,
+            date: '01/01',
+            content: content,
+            img: selectedFile,
+        }
+        dispatch(addPostAC(post))
+
         setOpen(false)
+
+        setTitle('')
+        setContent('')
+        setCategory('')
+        setSelectedFile(null)
     }
 
     return (
@@ -75,19 +109,20 @@ export default function FullScreenDialog({ text }: Props) {
                 </AppBar>
                 <form className={style.popup_form}>
                     <h4>Title</h4>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => {handleTitle(e)}}/>
 
                     <h4>Content</h4>
-                    <textarea rows={10}></textarea>
+                    <textarea rows={10} onChange={(e) => {handleContent(e)}}></textarea>
 
                     <div className="row">
                         <div className="col-lg-4">
                             <h4>Select Categories</h4>
-                            <input type="search" />
+                            <input type="text" onChange={(e) => {handleCategory(e)}}/>
                         </div>
                         <div className="col-lg-4">
                             <h4>Post Image</h4>
                             <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef}/>
+
                             {selectedFile && (
                                 <div className={style.selected_image}>
                                     <button onClick={removeFile}>X</button>
