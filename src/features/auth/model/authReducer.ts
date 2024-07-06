@@ -41,7 +41,7 @@ export const logIn = (data: LoginParamsType) => async (dispatch: Dispatch<any>) 
             dispatch(setLoaderAC('succeeded'))
         }
     } catch (error) {
-        alert(error)
+        console.log(error)
         dispatch(setLoaderAC('failed'))
     }
 }
@@ -66,7 +66,7 @@ export const logOut = () => async (dispatch: Dispatch<any>) => {
             dispatch(setLoaderAC('succeeded'))
         }
     } catch (error) {
-        alert(error)
+        console.log(error)
         dispatch(setLoaderAC('failed'))
     }
 }

@@ -2,14 +2,21 @@ import { PostSummary } from '../../../common/components/slider/SliderComponent'
 import style from './articleItem.module.scss'
 
 const ArticleItem = ({ date, title, category, mounth, img }: PostSummary) => {
-    if (!img.includes('/')) {
-        img = `/freeToGame/src/assets/articles/${img}`
-    }
+    const isBase64Image = img.startsWith('data:image')
 
     return (
         <article className={style.article_grid_item}>
             <div className={style.art_img}>
-                <img src={img} alt="#" />
+                <img
+                    src={
+                        isBase64Image
+                            ? img
+                            : img.startsWith('/freeToGame/src/assets/')
+                              ? img
+                              : `/freeToGame/src/assets/articles/${img}`
+                    }
+                    alt="#"
+                />
             </div>
             <div className={style.art_date}>
                 <span className={style.art_date_num}>{date}</span>

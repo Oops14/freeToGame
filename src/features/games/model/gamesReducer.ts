@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 import { setLoaderAC } from '../../../app/appReducer.ts'
-import { gamesApi } from '../api/gamesApi.ts'
 import { GameDetails, GameInitialStateType, GameType } from '../../../common/types/types.ts'
+import { gamesApi } from '../api/gamesApi.ts'
 
 // Cases
 const SET_GAMES = 'APP/SET-GAMES'
@@ -58,7 +58,7 @@ export const setGamesTC = () => (dispatch: Dispatch<any>) => {
             dispatch(setLoaderAC('succeeded'))
         })
         .catch((err) => {
-            alert(err)
+            console.log(err)
             dispatch(setLoaderAC('failed'))
         })
 }
@@ -82,7 +82,7 @@ export const getCategoryGamesTC = (category: string) => {
                 dispatch(setLoaderAC('succeeded'))
             })
             .catch((err) => {
-                alert(err)
+                console.log(err)
                 dispatch(setLoaderAC('failed'))
             })
     }
@@ -107,7 +107,7 @@ export const getGameByIdTC = (id: number) => {
                 dispatch(setLoaderAC('succeeded'))
             })
             .catch((err) => {
-                alert(err)
+                console.log(err)
             })
     }
 }

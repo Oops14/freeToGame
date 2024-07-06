@@ -1,8 +1,4 @@
-/**
- * TODO: REMOVE AFTER GETTING THE IMAGE FROM THE FIELD.
- */
 import { v4 as uuidv4 } from 'uuid'
-import art_img from '../../../assets/articles/1.jpg'
 
 const ADD_POST = 'POSTS/ADD_POST'
 
@@ -13,7 +9,7 @@ const initialPostState = {
             title: 'Diablo 4 Patch 1.03 Fixes Nightmare Dungeons and the Endgame XP Grind',
             category: 'Blog',
             date: '28 JUN',
-            img: art_img,
+            img: '/freeToGame/src/assets/articles/1.jpg',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },
@@ -22,7 +18,7 @@ const initialPostState = {
             title: 'Flower Arrangement Tips & Tricks from Floral Experts',
             category: 'Blog',
             date: '28 JUN',
-            img: art_img,
+            img: '/freeToGame/src/assets/articles/1.jpg',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },
@@ -31,7 +27,7 @@ const initialPostState = {
             title: 'Flower Arrangement Tips & Tricks from Floral Experts',
             category: 'Blog',
             date: '28 JUN',
-            img: art_img,
+            img: '/freeToGame/src/assets/articles/1.jpg',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },

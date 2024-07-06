@@ -53,7 +53,7 @@ export const isInitializedTC = () => async (dispatch: Dispatch<any>) => {
             dispatch(setLoaderAC('succeeded'))
         }
     } catch (error) {
-        alert(error)
+        console.log(error)
         dispatch(setLoaderAC('failed'))
     }
     // finally {
