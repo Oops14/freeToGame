@@ -5,7 +5,8 @@ import Post from '../../../../../features/posts/ui/dashboard/Post'
 import FullScreenDialog from '../../../popup/FullScreenDialog.tsx'
 import style from '../../dashboard.module.scss'
 const DashboardPosts = () => {
-    const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts.posts)
+    // @ts-ignore
+    const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts.posts);
 
     return (
         <>

@@ -8,12 +8,11 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { TransitionProps } from '@mui/material/transitions'
 import * as React from 'react'
+import { useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import { useAppDispatch } from '../../../app/store.ts'
+import { addPostAC } from '../../../features/posts/model/postReducer.ts'
 import style from './popup.module.scss'
-import {useRef, useState} from "react";
-import {useAppDispatch} from "../../../app/store.ts";
-import {addPostAC} from "../../../features/posts/model/postReducer.ts";
-import {v4 as uuidv4} from 'uuid';
-
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -36,21 +35,21 @@ export default function FullScreenDialog({ text }: Props) {
     const [content, setContent] = useState('')
     const [category, setCategory] = useState('')
 
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null)
     // Clear the file input completely.
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files ? event.target.files[0] : null;
-        setSelectedFile(file);
-    };
+        const file = event.target.files ? event.target.files[0] : null
+        setSelectedFile(file)
+    }
 
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         const text = e.currentTarget.value
         setTitle(text)
     }
 
-    const handleContent = (e:  React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const content = e.currentTarget.value
         setContent(content)
     }
@@ -61,25 +60,15 @@ export default function FullScreenDialog({ text }: Props) {
     }
 
     const removeFile = () => {
-        setSelectedFile(null);
-        if (fileInputRef.current) fileInputRef.current.value = "";
+        setSelectedFile(null)
+        if (fileInputRef.current) fileInputRef.current.value = ''
     }
 
     const handleClickOpen = () => {
         setOpen(true)
     }
 
-    const handleClose = () => {
-        const post = {
-            id: uuidv4(),
-            title: title,
-            category: category,
-            date: '01/01',
-            content: content,
-            img: selectedFile,
-        }
-        dispatch(addPostAC(post))
-
+    const clearTheForm = () => {
         setOpen(false)
 
         setTitle('')
@@ -87,6 +76,28 @@ export default function FullScreenDialog({ text }: Props) {
         setCategory('')
         setSelectedFile(null)
     }
+
+    const handleClose = () => {
+        const post = {
+            id: uuidv4(),
+            title: title,
+            category: category,
+            date: '28 JUN',
+            content: content,
+            img: selectedFile?.name || '',
+        }
+
+        if (post.title && post.category && post.date && post.content && post.img) {
+            dispatch(addPostAC(post))
+            clearTheForm()
+        } else {
+            setOpen(false)
+        }
+    }
+
+    // React.useEffect(() => {
+    //     console.log(selectedFile)
+    // }, [selectedFile])
 
     return (
         <React.Fragment>
@@ -109,26 +120,44 @@ export default function FullScreenDialog({ text }: Props) {
                 </AppBar>
                 <form className={style.popup_form}>
                     <h4>Title</h4>
-                    <input type="text" onChange={(e) => {handleTitle(e)}}/>
+                    <input
+                        type="text"
+                        onChange={(e) => {
+                            handleTitle(e)
+                        }}
+                    />
 
                     <h4>Content</h4>
-                    <textarea rows={10} onChange={(e) => {handleContent(e)}}></textarea>
+                    <textarea
+                        rows={10}
+                        onChange={(e) => {
+                            handleContent(e)
+                        }}></textarea>
 
                     <div className="row">
                         <div className="col-lg-4">
                             <h4>Select Categories</h4>
-                            <input type="text" onChange={(e) => {handleCategory(e)}}/>
+                            <input
+                                type="text"
+                                onChange={(e) => {
+                                    handleCategory(e)
+                                }}
+                            />
                         </div>
                         <div className="col-lg-4">
                             <h4>Post Image</h4>
-                            <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef}/>
+                            <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} />
 
                             {selectedFile && (
                                 <div className={style.selected_image}>
                                     <button onClick={removeFile}>X</button>
                                     <p>File name: {selectedFile.name}</p>
                                     {/* Display the selected image */}
-                                    <img src={URL.createObjectURL(selectedFile)} alt="Selected" style={{ width: '100px', height: 'auto' }} />
+                                    <img
+                                        src={URL.createObjectURL(selectedFile)}
+                                        alt="Selected"
+                                        style={{ width: '100px', height: 'auto' }}
+                                    />
                                 </div>
                             )}
                         </div>

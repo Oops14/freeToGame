@@ -3,13 +3,16 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { CategoriesGridItem } from '../../../features/category-item/CategoriesGridItem.tsx'
 import { GameGridItem } from '../../../features/games/ui/game-grid/GameGridItem.tsx'
+import { Post } from '../../../features/posts/model/postReducer.ts'
 import ArticleItem from '../../../features/posts/ui/ArticleItem.tsx'
-import { ArticlesItems, Categories, GameType } from '../../types/types.ts'
+import { Categories, GameType } from '../../types/types.ts'
 import './slider.scss'
 import style from './sliderComponent.module.scss'
 
+export type PostSummary = Pick<Post, 'date' | 'title' | 'category' | 'mounth' | 'img'>
+
 type Props = {
-    elements: Categories[] | ArticlesItems[] | GameType[]
+    elements: Categories[] | PostSummary[] | GameType[]
     slidesToShow: number
     categories?: boolean
     articles?: boolean
@@ -46,7 +49,15 @@ export const SliderComponent = ({
                             ${screenshots ? style.screenshots : ''}
                             `}>
                                 {categories && <CategoriesGridItem title={el.title} />}
-                                {articles && <ArticleItem />}
+                                {articles && (
+                                    <ArticleItem
+                                        date={(el as PostSummary).date.split(' ')[0]}
+                                        title={(el as PostSummary).title}
+                                        category={(el as PostSummary).category}
+                                        mounth={(el as PostSummary).date.split(' ')[1]}
+                                        img={(el as PostSummary).img}
+                                    />
+                                )}
                                 {screenshots && 'thumbnail' in el && (
                                     <GameGridItem
                                         id={el.id}

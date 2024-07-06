@@ -1,23 +1,25 @@
-import art_img from '../../../assets/articles/1.jpg'
+import { PostSummary } from '../../../common/components/slider/SliderComponent'
 import style from './articleItem.module.scss'
 
-const ArticleItem = () => {
+const ArticleItem = ({ date, title, category, mounth, img }: PostSummary) => {
+    if (!img.includes('/')) {
+        img = `/freeToGame/src/assets/articles/${img}`
+    }
+
     return (
         <article className={style.article_grid_item}>
             <div className={style.art_img}>
-                <img src={art_img} alt="#" />
+                <img src={img} alt="#" />
             </div>
             <div className={style.art_date}>
-                <span className={style.art_date_num}>28</span> 
-                <span className={style.art_date_mounth}>JUN</span>
+                <span className={style.art_date_num}>{date}</span>
+                <span className={style.art_date_mounth}>{mounth}</span>
             </div>
             <div className={style.article_inner}>
                 <div className={style.art_category}>
-                    <span>Blog</span>
+                    <span>{category}</span>
                 </div>
-                <h5 className={style.art_title}>
-                    Diablo 4 Patch 1.03 Fixes Nightmare Dungeons and the Endgame XP Grind
-                </h5>
+                <h5 className={style.art_title}>{title}</h5>
             </div>
         </article>
     )
