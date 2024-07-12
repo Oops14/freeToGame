@@ -15,7 +15,7 @@ const DashboardPosts = () => {
             </div>
             <div className={style.filter_panel}>
                 <div className={style.add_new}>
-                    <FullScreenDialog text={'Add new Post'} />
+                    <FullScreenDialog text={'Add new Post'}/>
                     <button className="btn">Remove Post</button>
                 </div>
                 <div className="filter">
@@ -26,9 +26,31 @@ const DashboardPosts = () => {
                     </select>
                 </div>
             </div>
+
+            {/* Panel */}
+            <div className={style.post_item}>
+                <div className={style.post_block_title}>
+                    <input type="checkbox"/>
+                    <div className="post_title">
+                        Post Title
+                    </div>
+                </div>
+                <div className={style.author}>
+                    <span>Posted by</span>
+                </div>
+                <div className={style.categories}>Category</div>
+                <div className={style.comments}>
+                    Comments
+                </div>
+                <div className={style.date}>
+                    <span>Date</span>
+                    <span> </span>
+                </div>
+            </div>
+
             <div className={style.current_content_area}>
                 {posts.map((post) => {
-                    return <Post key={post.id} title={post.title} category={post.category} date={post.date} />
+                    return <Post key={post.id} title={post.title} category={post.category} date={post.date}/>
                 })}
             </div>
         </>

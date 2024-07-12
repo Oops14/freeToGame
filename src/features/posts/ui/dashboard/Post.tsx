@@ -16,11 +16,11 @@ const Post = ({ title, category, date }: Post) => {
                     <a href="#">{title}</a>
                 </div>
             </div>
-            <div className="author">
+            <div className={style.author}>
                 <span>Admin</span>
             </div>
             <div className={style.categories}>{category}</div>
-            <div className="comments">
+            <div className={style.comments}>
                 <RateReviewIcon />
             </div>
             <div className={style.date}>
