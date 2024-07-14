@@ -4,12 +4,14 @@ import thunk, { ThunkDispatch } from 'redux-thunk'
 import { authReducer } from '../features/auth/model/authReducer.ts'
 import { gamesReducer } from '../features/games/model/gamesReducer.ts'
 import { postReducer } from '../features/posts/model/postReducer.ts'
+import { reviewReducer } from '../features/review/model/ReviewReducer.ts'
 import { appReducer } from './appReducer.ts'
 
 const rootReducer = combineReducers({
     app: appReducer,
     games: gamesReducer,
     posts: postReducer,
+    reviews: reviewReducer,
     auth: authReducer,
 })
 

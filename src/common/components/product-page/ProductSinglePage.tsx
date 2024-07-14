@@ -1,24 +1,27 @@
 import { useEffect } from 'react'
-import { Header } from '../header/Header.tsx'
-import { Footer } from '../footer/Footer.tsx'
 import { useSelector } from 'react-redux'
-import style from './productSinglePage.module.scss'
+import { useLocation } from 'react-router'
+import { useParams } from 'react-router-dom'
+import Slider from 'react-slick'
+import { RequestStatusType } from '../../../app/appReducer.ts'
+import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
 import advant_img from '../../../assets/product-page/1.svg'
 import advant_img2 from '../../../assets/product-page/2.jpeg'
 import advant_img3 from '../../../assets/product-page/3.svg'
 import advant_img4 from '../../../assets/product-page/4.svg'
-import { AppRootStateType, useAppDispatch } from '../../../app/store.ts'
-import BasicRating from '../rating/BasicRating.tsx'
-import { Review } from '../../../features/review/ui/Review.tsx'
 import { getCategoryGamesTC, getGameByIdTC } from '../../../features/games/model/gamesReducer.ts'
-import { RequestStatusType } from '../../../app/appReducer.ts'
-import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
+import { ReviewItem } from '../../../features/review/model/ReviewReducer.ts'
+import { Review } from '../../../features/review/ui/Review.tsx'
 import { GameDetails, GameType } from '../../types/types.ts'
-import { useParams } from 'react-router-dom'
-import Slider from 'react-slick'
-import { useLocation } from 'react-router'
 import { scrollToTop } from '../../utils/scrollToTop.ts'
+import { Footer } from '../footer/Footer.tsx'
+import { Header } from '../header/Header.tsx'
+import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
+import BasicRating from '../rating/BasicRating.tsx'
 import { SliderComponent } from '../slider/SliderComponent.tsx'
+import style from './productSinglePage.module.scss'
+import { ReviewForm } from './reviews/ReviewForm.tsx'
+import ReviewRating from './reviews/ReviewRating.tsx'
 
 export const ProductSinglePage = () => {
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
@@ -30,6 +33,8 @@ export const ProductSinglePage = () => {
     const simmilarGames = gamesByCategory.sort(() => 0.5 - Math.random()).slice(0, 12)
     // refresh the page.
     const location = useLocation()
+
+    const reviews = useSelector<AppRootStateType, ReviewItem[]>((state) => state.reviews.reviews)
 
     useEffect(() => {
         if (id) dispatch(getGameByIdTC(Number(id)))
@@ -148,51 +153,32 @@ export const ProductSinglePage = () => {
                             <h4>Customer Reviews</h4>
                             <div className={`row ${style.row_center}`}>
                                 <div className="col-lg-6">
-                                    <div className={style.review_area}>
-                                        <h5>ADD A REVIEW</h5>
-                                        <div>
-                                            Your email address will not be published. Required fields are marked *
-                                        </div>
-                                        <form className={style.add_review_form} action="#">
-                                            <label>Your review * </label>
-                                            <textarea name="review_area" id="1"></textarea>
-                                            <label>Name *</label>
-                                            <input type="text" />
-                                            <label>Email *</label>
-                                            <input type="text" />
-
-                                            <button className={`btn ${style.review_btn}`}>Submit</button>
-                                        </form>
-                                    </div>
+                                    <ReviewForm />
                                 </div>
                                 <div className="col-lg-6">
-                                    <div className={style.reviews_counter}>
-                                        <div className={style.avarage_rating}>4</div>
-                                        <div className="rating">
-                                            <BasicRating />
-                                        </div>
-                                        <div className="couner_item">2 reviews</div>
-                                    </div>
+                                    <ReviewRating />
                                 </div>
                             </div>
                             <div className={style.product_counter_reviews}>2 REVIEWS FOR ELDEN RING</div>
                             <div className="row">
-                                <div className="col-lg-6">
-                                    <Review />
-                                </div>
-                                <div className="col-lg-6">
-                                    <Review />
-                                </div>
+                                {reviews.map((rev) => {
+                                    return (
+                                        <div className="col-lg-6">
+                                            <Review user={rev.userName} comment={rev.comment} />
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={style.related_products}>
                     <div className="container">
-                        <div style={{
-                            marginRight: "-15px",
-                            marginLeft: "-15px"
-                        }}>
+                        <div
+                            style={{
+                                marginRight: '-15px',
+                                marginLeft: '-15px',
+                            }}>
                             <SliderComponent
                                 elements={simmilarGames}
                                 slidesToShow={4}
