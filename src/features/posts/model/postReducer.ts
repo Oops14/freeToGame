@@ -1,3 +1,4 @@
+import { format } from 'date-fns' // Assuming you're using date-fns for date formatting
 import { v4 as uuidv4 } from 'uuid'
 
 const ADD_POST = 'POSTS/ADD_POST'
@@ -37,7 +38,9 @@ const initialPostState = {
 export const postReducer = (state = initialPostState, action: PostActions) => {
     switch (action.type) {
         case ADD_POST: {
-            return { ...state, posts: [...state.posts, action.post] }
+            const currentDate = format(new Date(), 'dd MMM').toUpperCase()
+
+            return { ...state, posts: [{ ...action.post, date: currentDate }, ...state.posts] }
         }
         default: {
             return state
