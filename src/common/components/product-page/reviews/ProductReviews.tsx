@@ -21,7 +21,7 @@ const ProductReviews = ({ productId }: Props) => {
                     <h4>Customer Reviews</h4>
                     <div className={`row ${style.row_center}`}>
                         <div className="col-lg-6 col-md-12">
-                            <ReviewForm />
+                            <ReviewForm productId={productId} />
                         </div>
                         <div className="col-lg-6 col-md-12">
                             <ReviewRating />
