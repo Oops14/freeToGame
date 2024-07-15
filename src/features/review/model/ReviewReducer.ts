@@ -1,6 +1,6 @@
 const ADD_REVIEW = 'APP/ADD_REVIEW'
 
-const initialPostState = {
+const initialReviewState = {
     reviews: [
         {
             userName: 'Guest',
@@ -17,10 +17,10 @@ const initialPostState = {
     ],
 }
 
-export const reviewReducer = (state = initialPostState, action: ReviewActions) => {
+export const reviewReducer = (state: InitialReviewState = initialReviewState, action: ReviewActions) => {
     switch (action.type) {
         case ADD_REVIEW: {
-            return state
+            return { ...state, reviews: [...state.reviews, action.review] }
         }
         default: {
             return state
@@ -28,8 +28,15 @@ export const reviewReducer = (state = initialPostState, action: ReviewActions) =
     }
 }
 
-type ReviewActions = any
+type ReviewActions = ReturnType<typeof addReviewAC>
+
+type InitialReviewState = {
+    reviews: ReviewItem[]
+}
+
 export type ReviewItem = {
     userName: string
     comment: string
 }
+
+const addReviewAC = (review: ReviewItem) => ({ type: ADD_REVIEW, review }) as const

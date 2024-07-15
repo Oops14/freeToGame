@@ -4,6 +4,7 @@ import { Post as PostType } from '../../../../../features/posts/model/postReduce
 import Post from '../../../../../features/posts/ui/dashboard/Post'
 import FullScreenDialog from '../../../popup/FullScreenDialog.tsx'
 import style from '../../dashboard.module.scss'
+
 const DashboardPosts = () => {
     // @ts-ignore
     const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts.posts)
