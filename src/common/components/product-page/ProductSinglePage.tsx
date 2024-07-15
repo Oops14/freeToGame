@@ -44,12 +44,12 @@ export const ProductSinglePage = () => {
             <div className={style.single_product}>
                 <div className={'container'}>
                     <div className={style.product_inner + ' ' + style.stretch}>
-                        <div className="col-lg-4">
+                        <div className="col-lg-4 col-md-12">
                             <div className={style.product_gallery}>
                                 <img src={productInfo.thumbnail} alt="#" />
                             </div>
                         </div>
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 col-md-12">
                             <ProductSummary/>
                             <ProductAdditionalInfo />
                         </div>
