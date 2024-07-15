@@ -10,12 +10,12 @@ import { scrollToTop } from '../../utils/scrollToTop.ts'
 import { Footer } from '../footer/Footer.tsx'
 import { Header } from '../header/Header.tsx'
 import LinearIndeterminate from '../progress-bar/LinearIndeterminate.tsx'
-import style from './productSinglePage.module.scss'
-import ProductReviews from './reviews/ProductReviews.tsx'
+import ProductAdditionalInfo from './additional-info/ProductAdditionalInfo.tsx'
 import Description from './description/Description.tsx'
-import ProductSummary from "./summary/ProductSummary.tsx";
-import ProductAdditionalInfo from "./additional-info/ProductAdditionalInfo.tsx";
-import RelatedProducts from "./related-products/RelatedProducts.tsx";
+import style from './productSinglePage.module.scss'
+import RelatedProducts from './related-products/RelatedProducts.tsx'
+import ProductReviews from './reviews/ProductReviews.tsx'
+import ProductSummary from './summary/ProductSummary.tsx'
 
 export const ProductSinglePage = () => {
     const loader = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
@@ -50,13 +50,13 @@ export const ProductSinglePage = () => {
                             </div>
                         </div>
                         <div className="col-lg-8 col-md-12">
-                            <ProductSummary/>
+                            <ProductSummary />
                             <ProductAdditionalInfo />
                         </div>
                     </div>
                 </div>
                 <Description />
-                <ProductReviews />
+                <ProductReviews productId={id} />
                 <RelatedProducts />
             </div>
             <Footer />

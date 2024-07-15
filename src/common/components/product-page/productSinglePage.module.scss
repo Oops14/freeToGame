@@ -85,14 +85,14 @@
     align-items: center;
     gap: 0 10px;
 
-    .additional_info_item_img {}
+    .additional_info_item_img {
+    }
 
     .info_title {
         font-weight: 500;
         color: rgb(119, 119, 119);
     }
 }
-
 
 .description {
     margin-bottom: 80px;
@@ -109,7 +109,6 @@
 }
 
 .desc_img_item {
-
     img {
         border-radius: 5px;
     }
@@ -180,7 +179,6 @@
     padding-right: calc((100vw - 1520px - var(--wd-scroll-w)) / 2);
 }
 
-
 // HELPERS
 .row_center {
     align-items: center;
@@ -196,18 +194,22 @@
 // ===== RESPONSIVE =====
 
 @media (max-width: 990px) {
-  .product_gallery {
-    border-radius: 5px;
-    margin-bottom: 20px;
+    .product_gallery {
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
 
-  }
+    .product_inner,
+    .reviews {
+        margin-bottom: 30px;
+    }
 
-  .product_inner,
-  .reviews {
-    margin-bottom: 30px;
-  }
+    .description {
+        margin-bottom: 40px;
+    }
+}
 
-  .description {
-    margin-bottom: 40px;
-  }
+.no_commnets_text {
+    font-size: 16px;
+    padding-left: 15px;
 }
