@@ -37,7 +37,9 @@ export const reviewReducer = (state: InitialReviewState = initialReviewState, ac
 type ReviewActions = ReturnType<typeof addReviewAC>
 
 export type InitialReviewState = {
-    [key: number]: ReviewItem[]
+    reviews: {
+        [key: number]: ReviewItem[]
+    }
 }
 
 export type ReviewItem = {
