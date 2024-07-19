@@ -9,12 +9,17 @@ export default defineConfig({
         exclude: ['js-big-decimal'],
     },
     server: {
-        port: 3001,
+        port: 3002,
         proxy: {
             '/api': {
                 target: 'https://free-to-play-games-database.p.rapidapi.com',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '/api/games'),
+            },
+            '/auth-api': {
+                target: 'https://social-network.samuraijs.com',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/auth-api/, '/api/1.1'),
             },
         },
     },

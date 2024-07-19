@@ -2,16 +2,27 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useAppDispatch } from '../../../../app/store'
 import { addReviewAC, ReviewItem } from '../../../../features/review/model/ReviewReducer'
+import DescriptionAlerts from '../../alert/DescriptionAlerts'
 import style from '../productSinglePage.module.scss'
 
 type Props = {
     productId: number
 }
 
+/**
+ *
+ * ReviewForm component allows users to submit reviews for a specific product.
+ * It uses local state to manage the input fields for the review, name, and email.
+ * The component dispatches an action to add the review to the global state upon form submission.
+ *
+ // TODO: ADD conditions for email area, add additional func. for name field and email field.
+ */
 export const ReviewForm = ({ productId }: Props) => {
     const [review, setReview] = useState<string>('')
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
+
+    const [isEmptyField, setIsEmptyField] = useState(false)
 
     const dispatch = useAppDispatch()
 
@@ -29,6 +40,11 @@ export const ReviewForm = ({ productId }: Props) => {
 
     const submitReview = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (email.length === 0 || name.length === 0 || review.length === 0) {
+            setIsEmptyField(true)
+            return
+        }
 
         const reviewObj: ReviewItem = {
             id: uuidv4(),
@@ -54,6 +70,14 @@ export const ReviewForm = ({ productId }: Props) => {
                 <button type="submit" className={`btn ${style.review_btn}`}>
                     Submit
                 </button>
+
+                {isEmptyField && (
+                    <DescriptionAlerts
+                        title="Fill all fields to leave a comment."
+                        typeAlert="warning"
+                        text="Make sure that you have defined the Email, Name and Review"
+                    />
+                )}
             </form>
         </div>
     )

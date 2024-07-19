@@ -24,7 +24,7 @@ const initialReviewState = {
 export const reviewReducer = (state: InitialReviewState = initialReviewState, action: ReviewActions) => {
     switch (action.type) {
         case ADD_REVIEW: {
-            const existingReviews = state.reviews[action.productId]
+            const existingReviews = state.reviews[action.productId] || [] // Ensure existingReviews is an array
 
             return { ...state, reviews: { ...state.reviews, [action.productId]: [...existingReviews, action.review] } }
         }
